@@ -1,0 +1,108 @@
+/* ChessX Design System Tokens & Themes */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Brand Palette - Red Giant Crimson Stellar */
+  --primary: #E11D48;
+  --primary-hover: #BE123C;
+  --primary-light: #FB7185;
+  --primary-glow: rgba(225, 29, 72, 0.45);
+
+  --accent-cyan: #FFB703;
+  --accent-cyan-glow: rgba(255, 183, 3, 0.4);
+  
+  --success: #F43F5E;
+  --success-glow: rgba(244, 63, 94, 0.45);
+  
+  --warning: #F59E0B;
+  --warning-glow: rgba(245, 158, 11, 0.3);
+
+  --danger: #FF2A4B;
+  --danger-glow: rgba(255, 42, 75, 0.45);
+
+  /* Backgrounds & Surfaces - Deep Cosmic Red Void */
+  --bg-void: #160408;
+  --bg-slate: #1F070C;
+  --surface-card: #310A14;
+  --surface-elevated: #48101E;
+  --surface-glass: rgba(55, 12, 23, 0.85);
+  --border-glass: rgba(255, 120, 140, 0.15);
+
+  /* Text Colors */
+  --text-main: #FFF1F2;
+  --text-muted: #FECDD3;
+  --text-dim: #FDA4AF;
+
+  /* Fonts */
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Default Theme: Red Giant Stellar */
+  --board-light: #FCA5A5;
+  --board-dark: #881337;
+  --board-border: #4C0519;
+  --square-highlight: rgba(255, 183, 3, 0.6);
+  --square-lastmove: rgba(225, 29, 72, 0.55);
+  --square-check: rgba(255, 0, 50, 0.85);
+
+  /* Layout & Spacing */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-bounce: 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Theme 1: Red Giant Stellar */
+[data-theme="redgiant"] {
+  --board-light: #FCA5A5;
+  --board-dark: #881337;
+  --board-border: #4C0519;
+  --square-highlight: rgba(255, 183, 3, 0.6);
+  --square-lastmove: rgba(225, 29, 72, 0.55);
+  --square-check: rgba(255, 0, 50, 0.85);
+}
+
+/* Theme 2: Classic Wood */
+[data-theme="wood"] {
+  --board-light: #E0C9A6;
+  --board-dark: #8B5A2B;
+  --board-border: #4A2E16;
+  --square-highlight: rgba(0, 206, 201, 0.45);
+  --square-lastmove: rgba(253, 203, 110, 0.45);
+  --square-check: rgba(214, 48, 49, 0.6);
+}
+
+/* Theme 3: Obsidian Glass */
+[data-theme="glass"] {
+  --board-light: #34495E;
+  --board-dark: #1C2833;
+  --board-border: #0F171E;
+  --square-highlight: rgba(162, 155, 254, 0.5);
+  --square-lastmove: rgba(0, 206, 201, 0.4);
+  --square-check: rgba(214, 48, 49, 0.75);
+}
+
+/* Theme 4: Cyberpunk Neon */
+[data-theme="cyber"] {
+  --board-light: #1E2038;
+  --board-dark: #0D0E1A;
+  --board-border: #6C5CE7;
+  --square-highlight: rgba(0, 206, 201, 0.6);
+  --square-lastmove: rgba(255, 118, 117, 0.5);
+  --square-check: rgba(255, 76, 76, 0.8);
+}
+
+/* Theme 5: Royal Marble */
+[data-theme="marble"] {
+  --board-light: #E8E8E8;
+  --board-dark: #5A6B7C;
+  --board-border: #2C3E50;
+  --square-highlight: rgba(0, 184, 148, 0.5);
+  --square-lastmove: rgba(253, 203, 110, 0.5);
+  --square-check: rgba(214, 48, 49, 0.65);
+}
