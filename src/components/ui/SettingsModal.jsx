@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, X, Volume2, Cpu, Palette } from 'lucide-react';
+import { Settings, X, Volume2, Cpu, Palette, Sun, Compass, Flame } from 'lucide-react';
 import { sounds } from '../../audio/soundSystem';
 
 export function SettingsModal({
@@ -9,14 +9,31 @@ export function SettingsModal({
   setSoundMuted,
   boardTheme,
   setBoardTheme,
+  bgEnvironment = 'earth_sun',
+  setBgEnvironment,
+  isSunFlipped = false,
+  setIsSunFlipped,
+  isTorchOn = false,
+  setIsTorchOn,
   aiDifficulty,
   setAiDifficulty
 }) {
   if (!isOpen) return null;
 
+  const envOptions = [
+    { id: 'earth_sun', name: '☀️ Sun & 3D Earth Atmosphere', desc: 'Solar flares & Earth horizon' },
+    { id: 'red_theme', name: '🔴 Crimson Red Nebula', desc: 'Mars red atmosphere & star dust' },
+    { id: 'tournament', name: '🏆 Grand Tournament Arena', desc: 'Oak hardwood floor & spotlights' },
+    { id: 'cozy_lounge', name: '🪵 Cozy Wood Study', desc: 'Warm mahogany & fireplace glow' },
+    { id: 'royal_palace', name: '🏰 Royal Marble Citadel', desc: 'Gold-rimmed marble pedestal' },
+    { id: 'studio', name: '🎨 Minimalist Studio Lightbox', desc: 'Clean studio shadow plane' },
+    { id: 'zen_garden', name: '🌿 Zen Stone Sanctuary', desc: 'Slate slab & emerald ambient' },
+    { id: 'space', name: '🌌 Cosmic Deep Space', desc: 'Starfield & dragonfruit sparkles' },
+  ];
+
   return (
     <div className="modal-backdrop">
-      <div className="glass-panel modal-card" style={{ textAlign: 'left' }}>
+      <div className="glass-panel modal-card" style={{ textAlign: 'left', maxWidth: '580px', maxHeight: '90vh', overflowY: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Settings size={22} color="var(--accent-dragonfruit-bright)" />
@@ -32,6 +49,62 @@ export function SettingsModal({
           >
             <X size={18} />
           </button>
+        </div>
+
+        {/* 🔦 Torch Light Toggle */}
+        <div style={{ marginBottom: '1.8rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, marginBottom: '0.6rem', fontSize: '0.95rem' }}>
+            <Flame size={18} color="#ffaa00" /> 3D Torch Light Mode
+          </label>
+          <div>
+            <button
+              className={`btn ${isTorchOn ? 'btn-primary' : 'btn-secondary'}`}
+              style={{
+                width: '100%',
+                padding: '10px 14px',
+                fontSize: '0.88rem',
+                justifyContent: 'center',
+                background: isTorchOn ? 'linear-gradient(135deg, #ff7700, #ffaa00)' : '',
+                borderColor: isTorchOn ? '#ffaa00' : ''
+              }}
+              onClick={() => {
+                sounds.playClick();
+                if (setIsTorchOn) setIsTorchOn(!isTorchOn);
+              }}
+            >
+              <Flame size={16} color={isTorchOn ? '#fff' : '#ffaa00'} />
+              <span>{isTorchOn ? 'Torch Light: ON' : 'Torch Light: OFF'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* 3D Background Environments */}
+        <div style={{ marginBottom: '1.8rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, marginBottom: '0.6rem', fontSize: '0.95rem' }}>
+            <Compass size={18} color="var(--accent-dragonfruit-bright)" /> 3D Background Environment & Atmosphere
+          </label>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+            {envOptions.map((env) => (
+              <button
+                key={env.id}
+                className={`btn ${bgEnvironment === env.id ? 'btn-primary' : 'btn-secondary'}`}
+                style={{
+                  justifyContent: 'flex-start',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  padding: '10px 12px',
+                  border: bgEnvironment === env.id ? '1px solid var(--accent-dragonfruit)' : '1px solid var(--border-glass)'
+                }}
+                onClick={() => {
+                  sounds.playClick();
+                  if (setBgEnvironment) setBgEnvironment(env.id);
+                }}
+              >
+                <div style={{ fontWeight: 700, fontSize: '0.85rem' }}>{env.name}</div>
+                <div style={{ fontSize: '0.73rem', opacity: 0.75, fontWeight: 400, marginTop: '2px' }}>{env.desc}</div>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Board Colour Themes */}

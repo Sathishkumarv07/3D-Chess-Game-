@@ -95,7 +95,7 @@ export function GameHUD({
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
         
         {/* Action Buttons */}
-        <div className="glass-panel hud-interactive" style={{ padding: '10px 16px', display: 'flex', gap: '12px' }}>
+        <div className="glass-panel hud-interactive" style={{ padding: '10px 16px', display: 'flex', gap: '12px', alignItems: 'center' }}>
           <button
             className="btn btn-secondary"
             style={{ padding: '8px 16px', fontSize: '0.88rem' }}

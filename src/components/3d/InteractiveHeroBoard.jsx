@@ -165,7 +165,7 @@ function FallingPieces3D({ knockTrigger }) {
   );
 }
 
-export function InteractiveHeroBoard({ theme = 'brown' }) {
+export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_sun' }) {
   const [knockTrigger, setKnockTrigger] = useState(0);
 
   const pieceElements = [];
@@ -204,7 +204,7 @@ export function InteractiveHeroBoard({ theme = 'brown' }) {
         camera={{ position: [5.5, 6.5, 6.5], fov: 48 }}
         gl={{ antialias: true, alpha: true }}
       >
-        <EnvironmentLighting />
+        <EnvironmentLighting bgEnvironment={bgEnvironment} />
 
         <RotatingGroup>
           <ChessBoard3D

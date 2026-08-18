@@ -94,7 +94,7 @@ const FEATURES = [
 ];
 
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
-export function DashboardView({ startGameMode, openOnlineModal, boardTheme }) {
+export function DashboardView({ startGameMode, openOnlineModal, boardTheme, bgEnvironment }) {
   const { user } = useAuth();
   const { stats } = useStats();
 
@@ -152,7 +152,7 @@ export function DashboardView({ startGameMode, openOnlineModal, boardTheme }) {
           background: 'rgba(20, 10, 38, 0.9)',
         }}
       >
-        <InteractiveHeroBoard theme={boardTheme} />
+        <InteractiveHeroBoard theme={boardTheme} bgEnvironment={bgEnvironment} />
 
         {/* Hero overlay */}
         <div style={{

@@ -37,6 +37,29 @@ export default function App() {
   );
   const setBoardTheme = (t) => { setBoardThemeState(t); localStorage.setItem('chessx_board_theme', t); };
 
+  const [bgEnvironment, setBgEnvironmentState] = useState(
+    () => localStorage.getItem('chessx_bg_env') || 'earth_sun'
+  );
+  const setBgEnvironment = (env) => { setBgEnvironmentState(env); localStorage.setItem('chessx_bg_env', env); };
+
+  const [isSunFlipped, setIsSunFlippedState] = useState(
+    () => localStorage.getItem('chessx_sun_flipped') === 'true'
+  );
+  const setIsSunFlipped = (val) => {
+    const next = typeof val === 'function' ? val(isSunFlipped) : val;
+    setIsSunFlippedState(next);
+    localStorage.setItem('chessx_sun_flipped', String(next));
+  };
+
+  const [isTorchOn, setIsTorchOnState] = useState(
+    () => localStorage.getItem('chessx_torch_on') === 'true'
+  );
+  const setIsTorchOn = (val) => {
+    const next = typeof val === 'function' ? val(isTorchOn) : val;
+    setIsTorchOnState(next);
+    localStorage.setItem('chessx_torch_on', String(next));
+  };
+
   const [soundMuted, setSoundMuted]         = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isOnlineModalOpen, setIsOnlineModalOpen] = useState(false);
@@ -140,32 +163,42 @@ export default function App() {
     isAiThinkingRef.current = true;
 
     setTimeout(() => {
-      const bestMove = getBestMove(currentGame, aiDiffRef.current);
-      if (bestMove) {
-        const moveRes = currentGame.makeMove(bestMove);
-        if (moveRes) {
-          moveRes.captured ? sounds.playCapture() : sounds.playMove();
-          if (moveRes.inCheck) {
-            sounds.playCheck();
-            setKingInCheckPos(currentGame.findKing(currentGame.activeColor));
-          } else {
-            setKingInCheckPos(null);
-          }
-          setLastMove({ from: moveRes.from, to: moveRes.to });
-          setGame(Object.assign(Object.create(Object.getPrototypeOf(currentGame)), currentGame));
+      try {
+        const bestMove = getBestMove(currentGame, aiDiffRef.current);
+        if (bestMove) {
+          const moveRes = currentGame.makeMove(bestMove);
+          if (moveRes) {
+            moveRes.captured ? sounds.playCapture() : sounds.playMove();
+            if (moveRes.inCheck) {
+              sounds.playCheck();
+              setKingInCheckPos(currentGame.findKing(currentGame.activeColor));
+            } else {
+              setKingInCheckPos(null);
+            }
+            setLastMove({ from: moveRes.from, to: moveRes.to });
 
-          if (moveRes.isCheckmate) {
-            endGameFull(
-              moveRes.color === 'w' ? 'win' : 'loss',
-              moveRes.color === 'w' ? 'WHITE WINS BY CHECKMATE!' : 'BLACK WINS BY CHECKMATE!'
-            );
-          } else if (moveRes.isStalemate) {
-            endGameFull('draw', 'DRAW BY STALEMATE');
+            // Create a fresh instance for reliable React state rendering
+            const updatedGame = new ChessGame(currentGame.generateFen());
+            updatedGame.moveLog = [...currentGame.moveLog];
+            updatedGame.history = [...currentGame.history];
+            setGame(updatedGame);
+
+            if (moveRes.isCheckmate) {
+              endGameFull(
+                moveRes.color === 'w' ? 'win' : 'loss',
+                moveRes.color === 'w' ? 'WHITE WINS BY CHECKMATE!' : 'BLACK WINS BY CHECKMATE!'
+              );
+            } else if (moveRes.isStalemate) {
+              endGameFull('draw', 'DRAW BY STALEMATE');
+            }
           }
         }
+      } catch (err) {
+        console.error('AI execution error:', err);
+      } finally {
+        isAiThinkingRef.current = false;
       }
-      isAiThinkingRef.current = false;
-    }, 400);
+    }, 350);
   }, [endGameFull]);
 
   // ── Player square click ─────────────────────────────────────────────────────
@@ -187,7 +220,11 @@ export default function App() {
           setLastMove({ from: moveRes.from, to: moveRes.to });
           setSelectedSquare(null);
           setLegalMoves([]);
-          setGame(Object.assign(Object.create(Object.getPrototypeOf(game)), game));
+
+          const updatedGame = new ChessGame(game.generateFen());
+          updatedGame.moveLog = [...game.moveLog];
+          updatedGame.history = [...game.history];
+          setGame(updatedGame);
 
           if (moveRes.isCheckmate) {
             endGameFull(
@@ -200,8 +237,8 @@ export default function App() {
             return;
           }
 
-          if (gameMode === 'ai' && game.activeColor === 'b') {
-            triggerAiMove(game);
+          if (gameMode === 'ai' && updatedGame.activeColor === 'b') {
+            triggerAiMove(updatedGame);
           }
           return;
         }
@@ -219,13 +256,18 @@ export default function App() {
     }
   }, [game, selectedSquare, legalMoves, isGameOver, gameMode, triggerAiMove, endGameFull]);
 
-  // ── Spectate auto-play ──────────────────────────────────────────────────────
+  // ── Automatic AI turn monitoring ───────────────────────────────────────────
   useEffect(() => {
-    if (activeTab === 'game' && gameMode === 'spectate' && !isGameOver) {
-      const timer = setTimeout(() => triggerAiMove(game), 800);
-      return () => clearTimeout(timer);
+    if (activeTab === 'game' && !isGameOver && !isAiThinkingRef.current) {
+      if (gameMode === 'ai' && game.activeColor === 'b') {
+        const timer = setTimeout(() => triggerAiMove(game), 350);
+        return () => clearTimeout(timer);
+      } else if (gameMode === 'spectate') {
+        const timer = setTimeout(() => triggerAiMove(game), 650);
+        return () => clearTimeout(timer);
+      }
     }
-  }, [activeTab, gameMode, game, isGameOver, triggerAiMove]);
+  }, [game, gameMode, activeTab, isGameOver, triggerAiMove]);
 
   // ── Start a new game ────────────────────────────────────────────────────────
   const startGameMode = (mode, difficulty = 'master') => {
@@ -288,6 +330,7 @@ export default function App() {
             startGameMode={startGameMode}
             openOnlineModal={() => setIsOnlineModalOpen(true)}
             boardTheme={boardTheme}
+            bgEnvironment={bgEnvironment}
           />
         )}
 
@@ -305,6 +348,12 @@ export default function App() {
               lastMove={lastMove}
               kingInCheckPos={kingInCheckPos}
               theme={boardTheme}
+              bgEnvironment={bgEnvironment}
+              setBgEnvironment={setBgEnvironment}
+              isSunFlipped={isSunFlipped}
+              setIsSunFlipped={setIsSunFlipped}
+              isTorchOn={isTorchOn}
+              setIsTorchOn={setIsTorchOn}
               onSquareClick={handleSquareClick}
               onPieceClick={handleSquareClick}
             />
@@ -318,6 +367,8 @@ export default function App() {
               onResign={handleResign}
               timeControl={timeControl}
               onTimeOut={handleTimeOut}
+              bgEnvironment={bgEnvironment}
+              setBgEnvironment={setBgEnvironment}
             />
           </div>
         )}
@@ -335,6 +386,12 @@ export default function App() {
         setSoundMuted={setSoundMuted}
         boardTheme={boardTheme}
         setBoardTheme={setBoardTheme}
+        bgEnvironment={bgEnvironment}
+        setBgEnvironment={setBgEnvironment}
+        isSunFlipped={isSunFlipped}
+        setIsSunFlipped={setIsSunFlipped}
+        isTorchOn={isTorchOn}
+        setIsTorchOn={setIsTorchOn}
         aiDifficulty={aiDifficulty}
         setAiDifficulty={setAiDifficulty}
       />
