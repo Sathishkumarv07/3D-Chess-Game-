@@ -15,6 +15,8 @@ import { OnlineModal } from './components/ui/OnlineModal';
 import { LoginModal } from './components/ui/LoginModal';
 import { PuzzleView } from './components/ui/PuzzleView';
 import { ProfileView } from './components/ui/ProfileView';
+import { AcademyView } from './components/ui/AcademyView';
+import { Footer } from './components/ui/Footer';
 import { EvalBar } from './components/ui/EvalBar';
 import { AchievementToast } from './components/ui/AchievementToast';
 import { TIME_CONTROLS } from './components/ui/ChessClock';
@@ -376,7 +378,10 @@ export default function App() {
         {activeTab === 'leaderboard' && <LeaderboardView />}
         {activeTab === 'history'     && <HistoryView />}
         {activeTab === 'puzzles'     && <PuzzleView />}
+        {activeTab === 'academy'     && <AcademyView />}
         {activeTab === 'profile'     && <ProfileView />}
+        
+        {activeTab !== 'game' && <Footer />}
       </main>
 
       <SettingsModal

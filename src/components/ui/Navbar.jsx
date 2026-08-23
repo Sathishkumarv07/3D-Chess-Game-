@@ -42,67 +42,82 @@ export function Navbar({ activeTab, setActiveTab, soundMuted, setSoundMuted, ope
   };
 
   return (
-    <header className="navbar">
+    <header className="navbar" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       {/* Left Header Section: Brand Logo */}
-      <div className="brand-logo" onClick={() => setActiveTab('dashboard')} style={{ cursor: 'pointer' }}>
+      <div className="brand-logo" onClick={() => setActiveTab('dashboard')} style={{ cursor: 'pointer', flexShrink: 0 }}>
         <div className="brand-icon">👑</div>
         <div className="brand-title" style={{ fontSize: '1.4rem', fontWeight: 900, fontFamily: 'var(--font-heading)' }}>
           CHESS<span style={{ color: 'var(--accent-dragonfruit)' }}>X</span>
         </div>
       </div>
 
-      {/* Right Header Section: Compact Navigation Items & Utilities */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <ul className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '4px', listStyle: 'none', margin: 0, padding: 0 }}>
+      {/* Middle Header Section: Centered Navigation Items */}
+      <ul className="nav-links" style={{
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '4px',
+        listStyle: 'none',
+        margin: 0,
+        padding: 0
+      }}>
+        <li
+          className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem' }}
+          onClick={() => { sounds.playClick(); setActiveTab('dashboard'); }}
+        >
+          Dashboard
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'game' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem' }}
+          onClick={() => { sounds.playClick(); setActiveTab('game'); }}
+        >
+          Play Game
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'puzzles' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+          onClick={() => { sounds.playClick(); setActiveTab('puzzles'); }}
+        >
+          <BookOpen size={13} /> Puzzles
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'academy' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem' }}
+          onClick={() => { sounds.playClick(); setActiveTab('academy'); }}
+        >
+          Tutorials
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'leaderboard' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem' }}
+          onClick={() => { sounds.playClick(); setActiveTab('leaderboard'); }}
+        >
+          Leaderboard
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem' }}
+          onClick={() => { sounds.playClick(); setActiveTab('history'); }}
+        >
+          History
+        </li>
+        {user && (
           <li
-            className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+            className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
             style={{ padding: '5px 11px', fontSize: '0.82rem' }}
-            onClick={() => { sounds.playClick(); setActiveTab('dashboard'); }}
+            onClick={() => { sounds.playClick(); setActiveTab('profile'); }}
           >
-            Dashboard
+            Profile
           </li>
-          <li
-            className={`nav-item ${activeTab === 'game' ? 'active' : ''}`}
-            style={{ padding: '5px 11px', fontSize: '0.82rem' }}
-            onClick={() => { sounds.playClick(); setActiveTab('game'); }}
-          >
-            Play Game
-          </li>
-          <li
-            className={`nav-item ${activeTab === 'puzzles' ? 'active' : ''}`}
-            style={{ padding: '5px 11px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '4px' }}
-            onClick={() => { sounds.playClick(); setActiveTab('puzzles'); }}
-          >
-            <BookOpen size={13} /> Puzzles
-          </li>
-          <li
-            className={`nav-item ${activeTab === 'leaderboard' ? 'active' : ''}`}
-            style={{ padding: '5px 11px', fontSize: '0.82rem' }}
-            onClick={() => { sounds.playClick(); setActiveTab('leaderboard'); }}
-          >
-            Leaderboard
-          </li>
-          <li
-            className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
-            style={{ padding: '5px 11px', fontSize: '0.82rem' }}
-            onClick={() => { sounds.playClick(); setActiveTab('history'); }}
-          >
-            History
-          </li>
-          {user && (
-            <li
-              className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
-              style={{ padding: '5px 11px', fontSize: '0.82rem' }}
-              onClick={() => { sounds.playClick(); setActiveTab('profile'); }}
-            >
-              Profile
-            </li>
-          )}
-        </ul>
+        )}
+      </ul>
 
-        {/* Separator Line */}
-        <div style={{ width: '1px', height: '20px', background: 'var(--border-glass)' }} />
-
+      {/* Right Header Section: Compact Utilities */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginLeft: 'auto', flexShrink: 0 }}>
         {/* Utility Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
