@@ -195,7 +195,7 @@ export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_s
 
   return (
     <div
-      style={{ width: '100%', height: '480px', borderRadius: '20px', overflow: 'hidden', position: 'relative', cursor: 'pointer' }}
+      style={{ width: '100%', height: '520px', borderRadius: '24px', overflow: 'hidden', position: 'relative', cursor: 'pointer' }}
       onClick={handleCanvasClick}
       onTouchStart={handleCanvasClick}
     >

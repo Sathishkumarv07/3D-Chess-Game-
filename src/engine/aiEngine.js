@@ -1,4 +1,5 @@
 // Minimax AI Engine with Alpha-Beta Pruning and Piece-Square Tables (PST)
+import { ChessGame } from './chessEngine';
 
 const PIECE_VALUES = {
   p: 100,

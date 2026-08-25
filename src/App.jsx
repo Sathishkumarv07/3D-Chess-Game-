@@ -381,7 +381,7 @@ export default function App() {
         {activeTab === 'academy'     && <AcademyView />}
         {activeTab === 'profile'     && <ProfileView />}
         
-        {activeTab !== 'game' && <Footer />}
+        {activeTab !== 'game' && <Footer navigateTab={navigateTab} />}
       </main>
 
       <SettingsModal

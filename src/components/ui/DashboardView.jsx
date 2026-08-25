@@ -139,17 +139,18 @@ export function DashboardView({ startGameMode, openOnlineModal, boardTheme, bgEn
         </div>
       )}
 
-      {/* ── Hero Section ──────────────────────────────────────────────── */}
+      {/* ── Hero Section (Unboxed Landing Layout) ────────────────────── */}
       <div
-        className="glass-panel"
         style={{
           position: 'relative',
-          borderRadius: 'var(--radius-lg)',
+          width: '100%',
+          minHeight: '520px',
+          borderRadius: '24px',
           overflow: 'hidden',
-          marginBottom: '2rem',
-          border: '1px solid var(--border-glass-bright)',
-          boxShadow: 'var(--shadow-dragonfruit)',
-          background: 'rgba(20, 10, 38, 0.9)',
+          marginBottom: '2.5rem',
+          background: 'radial-gradient(ellipse at top right, rgba(255, 0, 127, 0.14) 0%, rgba(15, 8, 30, 0) 70%), linear-gradient(180deg, rgba(15, 8, 30, 0.4) 0%, rgba(10, 5, 20, 0.8) 100%)',
+          display: 'flex',
+          alignItems: 'center'
         }}
       >
         <InteractiveHeroBoard theme={boardTheme} bgEnvironment={bgEnvironment} />
@@ -157,25 +158,25 @@ export function DashboardView({ startGameMode, openOnlineModal, boardTheme, bgEn
         {/* Hero overlay */}
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'linear-gradient(to right, rgba(11,5,23,0.80) 0%, rgba(11,5,23,0.3) 55%, transparent 100%)',
+          background: 'linear-gradient(90deg, rgba(10, 5, 20, 0.88) 0%, rgba(10, 5, 20, 0.45) 50%, transparent 100%)',
           display: 'flex', flexDirection: 'column', justifyContent: 'center',
-          padding: '2.5rem 3rem',
+          padding: '3rem 3.5rem',
         }}>
-          <div style={{ maxWidth: '480px' }}>
+          <div style={{ maxWidth: '520px' }}>
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               background: 'rgba(255,0,127,0.18)', border: '1px solid rgba(255,0,127,0.4)',
-              borderRadius: '999px', padding: '4px 14px', marginBottom: '1rem',
+              borderRadius: '999px', padding: '5px 16px', marginBottom: '1.2rem',
               fontSize: '0.78rem', fontWeight: 700, color: 'var(--accent-dragonfruit-bright)',
               letterSpacing: '1px', textTransform: 'uppercase',
             }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent-dragonfruit)', boxShadow: '0 0 8px var(--accent-dragonfruit)', display: 'inline-block' }} />
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent-dragonfruit)', boxShadow: '0 0 10px var(--accent-dragonfruit)', display: 'inline-block' }} />
               Next-Gen 3D Chess Platform
             </div>
 
             <h1 style={{
-              fontSize: 'clamp(2rem, 4vw, 3.2rem)', fontWeight: 900, lineHeight: 1.1,
-              marginBottom: '0.8rem',
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.6rem)', fontWeight: 900, lineHeight: 1.1,
+              marginBottom: '1rem',
               background: 'linear-gradient(135deg, #ffffff 0%, #ff3399 60%, #9d4edd 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -183,21 +184,21 @@ export function DashboardView({ startGameMode, openOnlineModal, boardTheme, bgEn
               Play Chess in<br />Stunning 3D
             </h1>
 
-            <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              Challenge AI, compete online with friends, or train your tactics with daily puzzles — all in a breathtaking 3D experience.
+            <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: '1.8rem' }}>
+              Challenge AI Bot, compete online with friends, or train your tactics with daily puzzles — all in a breathtaking 3D environment.
             </p>
 
-            <div style={{ display: 'flex', gap: '12px', pointerEvents: 'auto', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '14px', pointerEvents: 'auto', flexWrap: 'wrap' }}>
               <button
                 className="btn btn-primary"
-                style={{ padding: '12px 28px', fontSize: '1rem', gap: '8px' }}
+                style={{ padding: '14px 32px', fontSize: '1rem', gap: '10px' }}
                 onClick={() => { sounds.playClick(); startGameMode('ai', selectedDiff); }}
               >
                 <Play size={18} fill="white" /> Play vs Bot
               </button>
               <button
                 className="btn btn-secondary"
-                style={{ padding: '12px 24px', fontSize: '0.95rem' }}
+                style={{ padding: '14px 26px', fontSize: '0.98rem' }}
                 onClick={() => { sounds.playClick(); startGameMode('spectate'); }}
               >
                 <Tv2 size={16} /> Watch Live
@@ -206,13 +207,15 @@ export function DashboardView({ startGameMode, openOnlineModal, boardTheme, bgEn
           </div>
         </div>
 
-        {/* Click hint */}
+        {/* Touch / Click hint */}
         <div style={{
-          position: 'absolute', bottom: '14px', right: '18px',
-          fontSize: '0.72rem', color: 'rgba(255,255,255,0.3)',
+          position: 'absolute', bottom: '16px', right: '22px',
+          fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)',
+          background: 'rgba(0,0,0,0.35)', padding: '5px 14px', borderRadius: '20px',
+          backdropFilter: 'blur(6px)', border: '1px solid rgba(255,255,255,0.1)',
           pointerEvents: 'none',
         }}>
-          Click the board to launch pieces ✨
+          ✨ Touch board to jump pieces!
         </div>
       </div>
 

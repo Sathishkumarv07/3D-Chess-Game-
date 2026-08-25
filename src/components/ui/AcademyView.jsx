@@ -120,6 +120,174 @@ const LESSONS = [
       validMove: { from: { r: 1, c: 0 }, to: { r: 0, c: 0 } },
       symbols: { wR: '♖', wK: '♔', bK: '♚' }
     }
+  },
+  {
+    id: 'knight_bishop',
+    category: 'basics',
+    title: 'Knight & Bishop Dynamics',
+    description: 'Master close-combat Knights vs long-range Bishops and position them for maximum dominance.',
+    difficulty: 'Beginner',
+    time: '6 min',
+    icon: <Compass size={20} />,
+    color: '#00f0ff',
+    content: `
+      <h3>Knights vs. Bishops</h3>
+      <p>Bishops excel on open diagonals and long ranges. Knights thrive in closed positions and excel at hopping over obstacles.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Move your <strong>White Bishop</strong> along the long light diagonal to pin the <strong>Black Rook</strong> against the Black King!</p>
+    `,
+    checkup: {
+      prompt: 'Move your Bishop along the diagonal to pin the Black Rook!',
+      initialBoard: [
+        ['', '', '', 'bK'],
+        ['', '', 'bR', ''],
+        ['', '', '', ''],
+        ['wB', '', '', '']
+      ],
+      validMove: { from: { r: 3, c: 0 }, to: { r: 1, c: 2 } },
+      symbols: { wB: '♗', bR: '♜', bK: '♚' }
+    }
+  },
+  {
+    id: 'castling_safety',
+    category: 'openings',
+    title: 'Castling & King Safety',
+    description: 'Protect your King early with Kingside or Queenside castling while activating your Rooks.',
+    difficulty: 'Beginner',
+    time: '7 min',
+    icon: <BookOpen size={20} />,
+    color: '#22c55e',
+    content: `
+      <h3>Shield Your King Early</h3>
+      <p>Castling moves your King out of danger in the center and brings a Rook into active play near the center files.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Click your <strong>White King</strong> and castle 2 squares right to safety on the Kingside!</p>
+    `,
+    checkup: {
+      prompt: 'Move your King two squares to the right to castle!',
+      initialBoard: [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['wK', '', '', 'wR']
+      ],
+      validMove: { from: { r: 3, c: 0 }, to: { r: 3, c: 2 } },
+      symbols: { wK: '♔', wR: '♖' }
+    }
+  },
+  {
+    id: 'discovered_attacks',
+    category: 'tactics',
+    title: 'Discovered Attacks & Skewers',
+    description: 'Unleash hidden sniper attacks by moving an obstructing piece to deliver double threats.',
+    difficulty: 'Intermediate',
+    time: '9 min',
+    icon: <Award size={20} />,
+    color: '#ffd700',
+    content: `
+      <h3>Discovered Checks</h3>
+      <p>A discovered attack occurs when one piece moves out of the line of sight of another piece, unleashing a hidden attack.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Move your <strong>White Knight</strong> out of the file to discover check on the Black King with your Queen!</p>
+    `,
+    checkup: {
+      prompt: 'Move your Knight aside to unleash a discovered check with your Queen!',
+      initialBoard: [
+        ['', 'bK', '', ''],
+        ['', '', '', ''],
+        ['', 'wN', '', ''],
+        ['', 'wQ', '', '']
+      ],
+      validMove: { from: { r: 2, c: 1 }, to: { r: 1, c: 3 } },
+      symbols: { wN: '♘', wQ: '♕', bK: '♚' }
+    }
+  },
+  {
+    id: 'passed_pawns',
+    category: 'tactics',
+    title: 'Passed Pawns & Promotion',
+    description: 'Create unstoppable passed pawns that can march freely to the 8th rank to become Queens.',
+    difficulty: 'Intermediate',
+    time: '8 min',
+    icon: <Award size={20} />,
+    color: '#a855f7',
+    content: `
+      <h3>The Passed Pawn</h3>
+      <p>A passed pawn has no enemy pawns ahead of it on its file or adjacent files. It is a potential future Queen!</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Push your passed <strong>White Pawn</strong> to the 8th rank to promote it into a Queen!</p>
+    `,
+    checkup: {
+      prompt: 'Push your passed Pawn forward to the 8th rank to promote!',
+      initialBoard: [
+        ['', '', '', ''],
+        ['', 'wP', '', ''],
+        ['', '', '', ''],
+        ['', '', '', '']
+      ],
+      validMove: { from: { r: 1, c: 1 }, to: { r: 0, c: 1 } },
+      symbols: { wP: '♙' }
+    }
+  },
+  {
+    id: 'back_rank_mate',
+    category: 'endgames',
+    title: 'Back-Rank Checkmate Patterns',
+    description: 'Exploit opponent Kings trapped behind their pawn wall on the 8th rank.',
+    difficulty: 'Advanced',
+    time: '10 min',
+    icon: <Play size={20} />,
+    color: '#ff3b00',
+    content: `
+      <h3>Back-Rank Vulnerability</h3>
+      <p>When pawns block a King from stepping forward, a Rook or Queen on the back rank delivers instantaneous checkmate.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Infiltrate the 8th rank with your <strong>White Queen</strong> to deliver back-rank checkmate!</p>
+    `,
+    checkup: {
+      prompt: 'Move your Queen to the 8th rank for a back-rank checkmate!',
+      initialBoard: [
+        ['bP', 'bP', 'bP', 'bK'],
+        ['', '', '', ''],
+        ['', 'wQ', '', ''],
+        ['', '', '', '']
+      ],
+      validMove: { from: { r: 2, c: 1 }, to: { r: 0, c: 1 } },
+      symbols: { wQ: '♕', bK: '♚', bP: '♟' }
+    }
+  },
+  {
+    id: 'endgame_opposition',
+    category: 'endgames',
+    title: 'King & Pawn Endgame: Opposition',
+    description: 'Master King Opposition to outmaneuver the enemy King and escort your pawn safely.',
+    difficulty: 'Advanced',
+    time: '11 min',
+    icon: <Play size={20} />,
+    color: '#ff007f',
+    content: `
+      <h3>Key Squares & Opposition</h3>
+      <p>Taking the Opposition means placing your King directly across from the enemy King with one square in between.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Step your <strong>White King</strong> directly in front of the Black King to take the Opposition!</p>
+    `,
+    checkup: {
+      prompt: 'Move your King directly opposite the Black King to claim Opposition!',
+      initialBoard: [
+        ['', 'bK', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', 'wK', '', '']
+      ],
+      validMove: { from: { r: 3, c: 1 }, to: { r: 2, c: 1 } },
+      symbols: { wK: '♔', bK: '♚' }
+    }
   }
 ];
 
