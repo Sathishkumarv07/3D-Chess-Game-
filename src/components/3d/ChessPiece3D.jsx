@@ -8,6 +8,7 @@ export function ChessPiece3D({
   position,
   isSelected,
   isPossibleTarget,
+  lowSpecMode = false,
   onClick
 }) {
   const meshGroupRef = useRef();
@@ -59,15 +60,15 @@ export function ChessPiece3D({
   // Geometries for pieces
   const geometry = useMemo(() => {
     switch (type) {
-      case 'p': return createPawnGeometry();
-      case 'r': return createRookGeometry();
-      case 'n': return createKnightGeometry();
-      case 'b': return createBishopGeometry();
-      case 'q': return createQueenGeometry();
-      case 'k': return createKingGeometry();
-      default: return new THREE.CylinderGeometry(0.3, 0.4, 0.8, 16);
+      case 'p': return createPawnGeometry(lowSpecMode);
+      case 'r': return createRookGeometry(lowSpecMode);
+      case 'n': return createKnightGeometry(lowSpecMode);
+      case 'b': return createBishopGeometry(lowSpecMode);
+      case 'q': return createQueenGeometry(lowSpecMode);
+      case 'k': return createKingGeometry(lowSpecMode);
+      default: return new THREE.CylinderGeometry(0.3, 0.4, 0.8, lowSpecMode ? 10 : 16);
     }
-  }, [type]);
+  }, [type, lowSpecMode]);
 
   const rotation = useMemo(() => {
     if (type === 'n') {
@@ -93,7 +94,7 @@ export function ChessPiece3D({
         document.body.style.cursor = 'auto';
       }}
     >
-      <mesh geometry={geometry} castShadow receiveShadow>
+      <mesh geometry={geometry} castShadow={!lowSpecMode} receiveShadow={!lowSpecMode}>
         <meshStandardMaterial {...materialProps} />
       </mesh>
 
@@ -134,7 +135,7 @@ function createBasePoints() {
   ];
 }
 
-function createPawnGeometry() {
+function createPawnGeometry(lowSpecMode) {
   const points = [
     ...createBasePoints(),
     new THREE.Vector2(0.2, 0.4),
@@ -145,10 +146,10 @@ function createPawnGeometry() {
     new THREE.Vector2(0.12, 0.76),
     new THREE.Vector2(0, 0.95)
   ];
-  return new THREE.LatheGeometry(points, 24);
+  return new THREE.LatheGeometry(points, lowSpecMode ? 12 : 24);
 }
 
-function createRookGeometry() {
+function createRookGeometry(lowSpecMode) {
   const points = [
     ...createBasePoints(),
     new THREE.Vector2(0.28, 0.5),
@@ -158,10 +159,10 @@ function createRookGeometry() {
     new THREE.Vector2(0.24, 1.05),
     new THREE.Vector2(0, 1.05)
   ];
-  return new THREE.LatheGeometry(points, 24);
+  return new THREE.LatheGeometry(points, lowSpecMode ? 12 : 24);
 }
 
-function createBishopGeometry() {
+function createBishopGeometry(lowSpecMode) {
   const points = [
     ...createBasePoints(),
     new THREE.Vector2(0.22, 0.5),
@@ -172,10 +173,10 @@ function createBishopGeometry() {
     new THREE.Vector2(0.04, 1.24),
     new THREE.Vector2(0, 1.3)
   ];
-  return new THREE.LatheGeometry(points, 24);
+  return new THREE.LatheGeometry(points, lowSpecMode ? 12 : 24);
 }
 
-function createQueenGeometry() {
+function createQueenGeometry(lowSpecMode) {
   const points = [
     ...createBasePoints(),
     new THREE.Vector2(0.24, 0.5),
@@ -186,10 +187,10 @@ function createQueenGeometry() {
     new THREE.Vector2(0.08, 1.45),
     new THREE.Vector2(0, 1.55)
   ];
-  return new THREE.LatheGeometry(points, 28);
+  return new THREE.LatheGeometry(points, lowSpecMode ? 14 : 28);
 }
 
-function createKingGeometry() {
+function createKingGeometry(lowSpecMode) {
   const points = [
     ...createBasePoints(),
     new THREE.Vector2(0.26, 0.5),
@@ -200,9 +201,9 @@ function createKingGeometry() {
     new THREE.Vector2(0.08, 1.58),
     new THREE.Vector2(0, 1.7)
   ];
-  return new THREE.LatheGeometry(points, 28);
+  return new THREE.LatheGeometry(points, lowSpecMode ? 14 : 28);
 }
 
-function createKnightGeometry() {
-  return new THREE.LatheGeometry(createBasePoints(), 20);
+function createKnightGeometry(lowSpecMode) {
+  return new THREE.LatheGeometry(createBasePoints(), lowSpecMode ? 10 : 20);
 }

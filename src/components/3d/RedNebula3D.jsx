@@ -3,10 +3,11 @@ import { useFrame } from '@react-three/fiber';
 import { Stars, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 
-export function RedNebula3D() {
+export function RedNebula3D({ lowSpecMode = false }) {
   const redSunRef = useRef();
 
   useFrame((state, delta) => {
+    if (lowSpecMode) return; // Skip rotation in low-spec mode
     if (redSunRef.current) {
       redSunRef.current.rotation.y += delta * 0.03;
     }
@@ -15,16 +16,16 @@ export function RedNebula3D() {
   return (
     <group>
       {/* Deep Red Cosmic Stars */}
-      <Stars radius={100} depth={50} count={3000} factor={5} saturation={1} fade speed={1.2} />
-      <Sparkles count={120} scale={18} size={4} speed={0.8} color="#ff0033" />
+      <Stars radius={100} depth={50} count={lowSpecMode ? 500 : 2500} factor={5} saturation={1} fade speed={lowSpecMode ? 0 : 1.2} />
+      {!lowSpecMode && <Sparkles count={80} scale={18} size={4} speed={0.8} color="#ff0033" />}
 
       {/* Ruby Red Key Light */}
       <directionalLight
         position={[25, 20, -35]}
         intensity={2.2}
         color="#ff2244"
-        castShadow
-        shadow-mapSize={[2048, 2048]}
+        castShadow={!lowSpecMode}
+        shadow-mapSize={lowSpecMode ? [512, 512] : [1024, 1024]}
       />
 
       {/* Deep Amber Fill Light */}

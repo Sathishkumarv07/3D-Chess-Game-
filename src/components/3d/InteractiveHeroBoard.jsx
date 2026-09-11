@@ -9,11 +9,12 @@ import { sounds } from '../../audio/soundSystem';
 
 const demoGame = new ChessGame();
 
-function RotatingGroup({ children }) {
+function RotatingGroup({ children, lowSpecMode }) {
   const groupRef = useRef();
   useFrame((state, delta) => {
+    if (lowSpecMode) return; // Completely freeze rotation loop in low-spec mode
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.1;
+      groupRef.current.rotation.y += delta * 0.08;
     }
   });
   return <group ref={groupRef}>{children}</group>;
@@ -165,7 +166,7 @@ function FallingPieces3D({ knockTrigger }) {
   );
 }
 
-export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_sun' }) {
+export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_sun', lowSpecMode = false }) {
   const [knockTrigger, setKnockTrigger] = useState(0);
 
   const pieceElements = [];
@@ -181,7 +182,7 @@ export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_s
             type={piece.type}
             color={piece.color}
             basePos={[posX, 0.1, posZ]}
-            knockTrigger={knockTrigger}
+            knockTrigger={lowSpecMode ? 0 : knockTrigger}
           />
         );
       }
@@ -190,7 +191,9 @@ export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_s
 
   const handleCanvasClick = () => {
     sounds.playCapture();
-    setKnockTrigger((prev) => prev + 1);
+    if (!lowSpecMode) {
+      setKnockTrigger((prev) => prev + 1);
+    }
   };
 
   return (
@@ -200,29 +203,36 @@ export function InteractiveHeroBoard({ theme = 'brown', bgEnvironment = 'earth_s
       onTouchStart={handleCanvasClick}
     >
       <Canvas
-        shadows
+        shadows={!lowSpecMode}
+        dpr={lowSpecMode ? 1 : [1, 1.5]}
         camera={{ position: [5.5, 6.5, 6.5], fov: 48 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{
+          antialias: !lowSpecMode,
+          alpha: true,
+          powerPreference: lowSpecMode ? 'low-power' : 'default',
+          precision: lowSpecMode ? 'mediump' : 'highp'
+        }}
       >
-        <EnvironmentLighting bgEnvironment={bgEnvironment} />
+        <EnvironmentLighting bgEnvironment={bgEnvironment} lowSpecMode={lowSpecMode} />
 
-        <RotatingGroup>
+        <RotatingGroup lowSpecMode={lowSpecMode}>
           <ChessBoard3D
             boardState={demoGame.board}
             theme={theme}
+            lowSpecMode={lowSpecMode}
           />
           {pieceElements}
         </RotatingGroup>
 
-        {/* Falling Animated 3D Pieces */}
-        <FallingPieces3D knockTrigger={knockTrigger} />
+        {/* Falling Animated 3D Pieces only in high quality mode */}
+        {!lowSpecMode && <FallingPieces3D knockTrigger={knockTrigger} />}
 
         <OrbitControls
           enableZoom={false}
           enablePan={false}
           autoRotate={false}
           maxPolarAngle={Math.PI / 2 - 0.05}
-          enableDamping
+          enableDamping={!lowSpecMode}
         />
       </Canvas>
     </div>

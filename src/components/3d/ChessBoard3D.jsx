@@ -9,6 +9,7 @@ export function ChessBoard3D({
   lastMove = null,
   kingInCheckPos = null,
   theme = 'dragonfruit',
+  lowSpecMode = false,
   onSquareClick
 }) {
   const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -125,7 +126,7 @@ export function ChessBoard3D({
             <group key={`${row}-${col}`} position={[posX, 0, posZ]}>
               <mesh
                 material={isLight ? lightSquareMat : darkSquareMat}
-                receiveShadow
+                receiveShadow={!lowSpecMode}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (onSquareClick) onSquareClick(row, col);

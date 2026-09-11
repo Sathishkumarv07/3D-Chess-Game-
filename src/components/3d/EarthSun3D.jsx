@@ -3,12 +3,13 @@ import { useFrame } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import * as THREE from 'three';
 
-export function EarthSun3D() {
+export function EarthSun3D({ lowSpecMode = false }) {
   const earthRef = useRef();
   const cloudsRef = useRef();
   const sunGroupRef = useRef();
 
   useFrame((state, delta) => {
+    if (lowSpecMode) return; // Skip frame rotation overhead in low-spec mode
     if (earthRef.current) {
       earthRef.current.rotation.y += delta * 0.05;
     }
@@ -23,15 +24,15 @@ export function EarthSun3D() {
   return (
     <group>
       {/* Deep Space Stars */}
-      <Stars radius={120} depth={60} count={3500} factor={4} saturation={0.9} fade speed={0.8} />
+      <Stars radius={120} depth={60} count={lowSpecMode ? 600 : 2500} factor={4} saturation={0.9} fade speed={lowSpecMode ? 0 : 0.8} />
 
       {/* Solar Key Light coming from the Sun position */}
       <directionalLight
         position={[28, 18, -40]}
         intensity={2.2}
         color="#fff4db"
-        castShadow
-        shadow-mapSize={[2048, 2048]}
+        castShadow={!lowSpecMode}
+        shadow-mapSize={lowSpecMode ? [512, 512] : [1024, 1024]}
       />
 
       {/* Earth Horizon Rim Fill Light */}

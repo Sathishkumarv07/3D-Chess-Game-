@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, X, Volume2, Cpu, Palette, Sun, Compass, Flame } from 'lucide-react';
+import { Settings, X, Volume2, Cpu, Palette, Sun, Compass, Flame, Zap } from 'lucide-react';
 import { sounds } from '../../audio/soundSystem';
 
 export function SettingsModal({
@@ -15,6 +15,8 @@ export function SettingsModal({
   setIsSunFlipped,
   isTorchOn = false,
   setIsTorchOn,
+  lowSpecMode = false,
+  setLowSpecMode,
   aiDifficulty,
   setAiDifficulty
 }) {
@@ -49,6 +51,64 @@ export function SettingsModal({
           >
             <X size={18} />
           </button>
+        </div>
+
+        {/* ⚡ Performance & Graphics Mode */}
+        <div style={{ marginBottom: '1.8rem' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, marginBottom: '0.6rem', fontSize: '0.95rem' }}>
+            <Zap size={18} color="#22c55e" /> Graphics & Performance Mode
+          </label>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+            <button
+              className={`btn ${lowSpecMode ? 'btn-primary' : 'btn-secondary'}`}
+              style={{
+                padding: '12px 14px',
+                fontSize: '0.88rem',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: '4px',
+                background: lowSpecMode ? 'rgba(34, 197, 94, 0.2)' : '',
+                borderColor: lowSpecMode ? '#22c55e' : '',
+                color: lowSpecMode ? '#22c55e' : ''
+              }}
+              onClick={() => {
+                sounds.playClick();
+                if (setLowSpecMode) setLowSpecMode(true);
+              }}
+            >
+              <span style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Zap size={14} fill="#22c55e" /> Fast Laptop Mode
+              </span>
+              <span style={{ fontSize: '0.74rem', opacity: 0.8, fontWeight: 400 }}>
+                Low GPU, 0 lag, smooth 60fps
+              </span>
+            </button>
+
+            <button
+              className={`btn ${!lowSpecMode ? 'btn-primary' : 'btn-secondary'}`}
+              style={{
+                padding: '12px 14px',
+                fontSize: '0.88rem',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                gap: '4px',
+                background: !lowSpecMode ? 'linear-gradient(135deg, var(--accent-dragonfruit), var(--accent-dragonfruit-bright))' : '',
+                borderColor: !lowSpecMode ? 'var(--accent-dragonfruit)' : '',
+                color: !lowSpecMode ? '#fff' : ''
+              }}
+              onClick={() => {
+                sounds.playClick();
+                if (setLowSpecMode) setLowSpecMode(false);
+              }}
+            >
+              <span style={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span>🌟</span> Ultra 3D Mode
+              </span>
+              <span style={{ fontSize: '0.74rem', opacity: 0.8, fontWeight: 400 }}>
+                Full shadow maps & particles
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* 🔦 Torch Light Toggle */}

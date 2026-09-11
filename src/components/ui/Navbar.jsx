@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Settings, User, LogOut, ChevronDown, BookOpen } from 'lucide-react';
+import { Volume2, VolumeX, Settings, User, LogOut, ChevronDown, BookOpen, Zap } from 'lucide-react';
 import { sounds } from '../../audio/soundSystem';
 import { useAuth } from '../../context/AuthContext';
 
-export function Navbar({ activeTab, setActiveTab, soundMuted, setSoundMuted, openSettings, openLogin }) {
+export function Navbar({ activeTab, setActiveTab, soundMuted, setSoundMuted, lowSpecMode, setLowSpecMode, openSettings, openLogin }) {
   const { user, signOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -120,6 +120,31 @@ export function Navbar({ activeTab, setActiveTab, soundMuted, setSoundMuted, ope
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginLeft: 'auto', flexShrink: 0 }}>
         {/* Utility Action Buttons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button
+            className="btn btn-secondary"
+            style={{
+              padding: '5px 11px',
+              fontSize: '0.78rem',
+              fontWeight: 700,
+              borderRadius: '999px',
+              background: lowSpecMode ? 'rgba(34, 197, 94, 0.15)' : 'rgba(255, 59, 0, 0.15)',
+              border: `1px solid ${lowSpecMode ? '#22c55e' : '#ff3b00'}`,
+              color: lowSpecMode ? '#22c55e' : '#ff5500',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              cursor: 'pointer'
+            }}
+            onClick={() => {
+              sounds.playClick();
+              if (setLowSpecMode) setLowSpecMode(!lowSpecMode);
+            }}
+            title={lowSpecMode ? "Fast Laptop Mode active. Click for Ultra 3D." : "Ultra 3D active. Click for Fast Laptop Mode."}
+          >
+            <Zap size={13} fill={lowSpecMode ? '#22c55e' : 'none'} />
+            <span>{lowSpecMode ? 'Fast Mode' : 'Ultra 3D'}</span>
+          </button>
+
           <button
             className="btn btn-secondary btn-icon"
             style={{ padding: '6px' }}

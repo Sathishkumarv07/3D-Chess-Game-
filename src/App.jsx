@@ -62,6 +62,15 @@ export default function App() {
     localStorage.setItem('chessx_torch_on', String(next));
   };
 
+  const [lowSpecMode, setLowSpecModeState] = useState(
+    () => localStorage.getItem('chessx_low_spec') !== 'false'
+  );
+  const setLowSpecMode = (val) => {
+    const next = typeof val === 'function' ? val(lowSpecMode) : val;
+    setLowSpecModeState(next);
+    localStorage.setItem('chessx_low_spec', String(next));
+  };
+
   const [soundMuted, setSoundMuted]         = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isOnlineModalOpen, setIsOnlineModalOpen] = useState(false);
@@ -317,6 +326,8 @@ export default function App() {
         setActiveTab={navigateTab}
         soundMuted={soundMuted}
         setSoundMuted={setSoundMuted}
+        lowSpecMode={lowSpecMode}
+        setLowSpecMode={setLowSpecMode}
         openSettings={() => setIsSettingsOpen(true)}
         openLogin={() => setIsLoginModalOpen(true)}
       />
@@ -333,6 +344,7 @@ export default function App() {
             openOnlineModal={() => setIsOnlineModalOpen(true)}
             boardTheme={boardTheme}
             bgEnvironment={bgEnvironment}
+            lowSpecMode={lowSpecMode}
           />
         )}
 
@@ -356,6 +368,7 @@ export default function App() {
               setIsSunFlipped={setIsSunFlipped}
               isTorchOn={isTorchOn}
               setIsTorchOn={setIsTorchOn}
+              lowSpecMode={lowSpecMode}
               onSquareClick={handleSquareClick}
               onPieceClick={handleSquareClick}
             />
@@ -399,6 +412,8 @@ export default function App() {
         setIsTorchOn={setIsTorchOn}
         aiDifficulty={aiDifficulty}
         setAiDifficulty={setAiDifficulty}
+        lowSpecMode={lowSpecMode}
+        setLowSpecMode={setLowSpecMode}
       />
 
       <OnlineModal

@@ -8,11 +8,13 @@ import { TorchLight3D } from './TorchLight3D';
 export function EnvironmentLighting({
   bgEnvironment = 'earth_sun',
   isSunFlipped = false,
-  isTorchOn = false
+  isTorchOn = false,
+  lowSpecMode = false
 }) {
   const lightGroupRef = useRef();
 
   useFrame((state) => {
+    if (lowSpecMode) return; // Skip continuous frame rotation overhead in low-spec mode
     if (lightGroupRef.current && (bgEnvironment === 'space' || bgEnvironment === 'earth_sun' || bgEnvironment === 'red_theme')) {
       lightGroupRef.current.rotation.y = state.clock.elapsedTime * 0.03;
     }
@@ -21,6 +23,7 @@ export function EnvironmentLighting({
   // Calculate direction multiplier for shadow flip
   const shadowMultX = isSunFlipped ? -1 : 1;
   const shadowMultZ = isSunFlipped ? -1 : 1;
+  const shadowMapSize = lowSpecMode ? [512, 512] : [1024, 1024];
 
   return (
     <group>
@@ -33,25 +36,25 @@ export function EnvironmentLighting({
           case 'earth_sun':
             return (
               <group scale={[shadowMultX, 1, shadowMultZ]}>
-                <EarthSun3D />
+                <EarthSun3D lowSpecMode={lowSpecMode} />
               </group>
             );
 
           case 'red_theme':
             return (
               <group scale={[shadowMultX, 1, shadowMultZ]}>
-                <RedNebula3D />
+                <RedNebula3D lowSpecMode={lowSpecMode} />
               </group>
             );
 
           case 'tournament':
             return (
               <group>
-                <mesh position={[0, -0.45, 0]} receiveShadow>
+                <mesh position={[0, -0.45, 0]} receiveShadow={!lowSpecMode}>
                   <boxGeometry args={[30, 0.1, 30]} />
                   <meshStandardMaterial color="#2c1a0e" roughness={0.3} metalness={0.1} />
                 </mesh>
-                <mesh position={[0, -0.38, 0]} receiveShadow>
+                <mesh position={[0, -0.38, 0]} receiveShadow={!lowSpecMode}>
                   <boxGeometry args={[11, 0.15, 11]} />
                   <meshStandardMaterial color="#4a2c11" roughness={0.4} metalness={0.2} />
                 </mesh>
@@ -61,8 +64,8 @@ export function EnvironmentLighting({
                   position={[8 * shadowMultX, 14, 6 * shadowMultZ]}
                   intensity={2.2}
                   color="#fff0d6"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <directionalLight position={[-8 * shadowMultX, 10, -6 * shadowMultZ]} intensity={0.6} color="#d4a373" />
               </group>
@@ -71,7 +74,7 @@ export function EnvironmentLighting({
           case 'cozy_lounge':
             return (
               <group>
-                <mesh position={[0, -0.42, 0]} receiveShadow>
+                <mesh position={[0, -0.42, 0]} receiveShadow={!lowSpecMode}>
                   <boxGeometry args={[24, 0.12, 24]} />
                   <meshStandardMaterial color="#3d1e11" roughness={0.4} metalness={0.05} />
                 </mesh>
@@ -81,8 +84,8 @@ export function EnvironmentLighting({
                   position={[7 * shadowMultX, 12, 8 * shadowMultZ]}
                   intensity={2.0}
                   color="#ffaa00"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <pointLight position={[-10 * shadowMultX, 5, -8 * shadowMultZ]} intensity={1.8} color="#ff5500" distance={20} />
               </group>
@@ -91,12 +94,12 @@ export function EnvironmentLighting({
           case 'royal_palace':
             return (
               <group>
-                <mesh position={[0, -0.42, 0]} receiveShadow>
-                  <cylinderGeometry args={[8.5, 9, 0.14, 48]} />
+                <mesh position={[0, -0.42, 0]} receiveShadow={!lowSpecMode}>
+                  <cylinderGeometry args={[8.5, 9, 0.14, lowSpecMode ? 24 : 48]} />
                   <meshStandardMaterial color="#f8f9fa" roughness={0.15} metalness={0.1} />
                 </mesh>
                 <mesh position={[0, -0.34, 0]}>
-                  <torusGeometry args={[8.5, 0.08, 16, 64]} />
+                  <torusGeometry args={[8.5, 0.08, 16, lowSpecMode ? 32 : 64]} />
                   <meshStandardMaterial color="#ffd700" roughness={0.2} metalness={0.8} />
                 </mesh>
 
@@ -105,8 +108,8 @@ export function EnvironmentLighting({
                   position={[10 * shadowMultX, 16, 10 * shadowMultZ]}
                   intensity={2.2}
                   color="#ffffff"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <directionalLight position={[-10 * shadowMultX, 12, -10 * shadowMultZ]} intensity={1.0} color="#ffd700" />
               </group>
@@ -115,7 +118,7 @@ export function EnvironmentLighting({
           case 'studio':
             return (
               <group>
-                <mesh position={[0, -0.41, 0]} receiveShadow>
+                <mesh position={[0, -0.41, 0]} receiveShadow={!lowSpecMode}>
                   <planeGeometry args={[50, 50]} />
                   <meshStandardMaterial color="#18181b" roughness={0.8} metalness={0.1} />
                 </mesh>
@@ -125,8 +128,8 @@ export function EnvironmentLighting({
                   position={[10 * shadowMultX, 15, 10 * shadowMultZ]}
                   intensity={2.2}
                   color="#ffffff"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <directionalLight position={[-10 * shadowMultX, 12, -8 * shadowMultZ]} intensity={1.0} color="#e4e4e7" />
               </group>
@@ -135,7 +138,7 @@ export function EnvironmentLighting({
           case 'zen_garden':
             return (
               <group>
-                <mesh position={[0, -0.42, 0]} receiveShadow>
+                <mesh position={[0, -0.42, 0]} receiveShadow={!lowSpecMode}>
                   <boxGeometry args={[12, 0.14, 12]} />
                   <meshStandardMaterial color="#212529" roughness={0.6} metalness={0.2} />
                 </mesh>
@@ -145,8 +148,8 @@ export function EnvironmentLighting({
                   position={[8 * shadowMultX, 14, 6 * shadowMultZ]}
                   intensity={2.0}
                   color="#74c69d"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <directionalLight position={[-8 * shadowMultX, 10, -6 * shadowMultZ]} intensity={0.8} color="#40916c" />
               </group>
@@ -161,12 +164,12 @@ export function EnvironmentLighting({
                   position={[8 * shadowMultX, 14, 6 * shadowMultZ]}
                   intensity={1.8}
                   color="#ff007f"
-                  castShadow
-                  shadow-mapSize={[2048, 2048]}
+                  castShadow={!lowSpecMode}
+                  shadow-mapSize={shadowMapSize}
                 />
                 <directionalLight position={[-8 * shadowMultX, 10, -6 * shadowMultZ]} intensity={1.0} color="#9d4edd" />
-                <Stars radius={100} depth={50} count={3500} factor={4} saturation={1} fade speed={1} />
-                <Sparkles count={100} scale={14} size={3.5} speed={0.5} color="#ff007f" />
+                <Stars radius={100} depth={50} count={lowSpecMode ? 600 : 2500} factor={4} saturation={1} fade speed={lowSpecMode ? 0 : 1} />
+                {!lowSpecMode && <Sparkles count={80} scale={14} size={3.5} speed={0.5} color="#ff007f" />}
               </group>
             );
         }

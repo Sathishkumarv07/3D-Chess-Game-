@@ -1,0 +1,1248 @@
+<!--
+  CHESSX CONSOLIDATED HTML TEMPLATES
+  Generated at: 2026-09-11T05:06:12.325Z
+  Total files combined: 2
+-->
+
+<!-- ==========================================================================
+     FILE: index.html
+     ========================================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta -->
+    <title>ChessX 3D — Next-Gen 3D Chess Platform</title>
+    <meta name="description" content="Play stunning 3D chess online. Challenge AI at 3 difficulty levels, compete with friends in private rooms, or solve daily puzzles — powered by Three.js & React Three Fiber." />
+    <meta name="keywords" content="chess, 3D chess, online chess, chess AI, chess puzzles, chess multiplayer, web chess, ChessX" />
+    <meta name="author" content="ChessX Team" />
+    <meta name="theme-color" content="#ff007f" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ChessX 3D — Next-Gen 3D Chess Platform" />
+    <meta property="og:description" content="Play stunning 3D chess online. Challenge AI, compete with friends, or train with daily puzzles." />
+    <meta property="og:image" content="/chess_world_hero.png" />
+    <meta property="og:url" content="https://chessx3d.app" />
+    <meta property="og:site_name" content="ChessX 3D" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ChessX 3D — Next-Gen 3D Chess Platform" />
+    <meta name="twitter:description" content="Play stunning 3D chess online. Challenge AI, compete with friends, or train with daily puzzles." />
+    <meta name="twitter:image" content="/chess_world_hero.png" />
+
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+<!-- ==========================================================================
+     FILE: showcase.html
+     ========================================================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO & Social Meta -->
+  <title>ChessX 3D — Next-Gen 3D & Cross-Platform Chess Platform</title>
+  <meta name="description" content="Experience ChessX 3D: ultra-fast, visually stunning 3D chess powered by Three.js, React Three Fiber, custom Minimax AI, and Flutter mobile." />
+  <meta name="keywords" content="chess, 3D chess, Three.js, React Three Fiber, Flutter chess, Minimax AI, online chess" />
+  <meta name="author" content="ChessX 3D Team" />
+  <meta name="theme-color" content="#ff3b00" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ChessX 3D — Next-Gen 3D Chess Platform" />
+  <meta property="og:description" content="Ultra-fast, visually stunning 3D chess powered by Three.js, React, and Flutter." />
+  <meta property="og:image" content="/chess_world_hero.png" />
+  
+  <!-- Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #0a0812;
+      --bg-dark-alt: #120e1e;
+      --bg-card: rgba(26, 14, 36, 0.75);
+      --bg-card-hover: rgba(42, 20, 52, 0.9);
+      --border-glass: rgba(255, 69, 0, 0.22);
+      --border-bright: rgba(255, 85, 0, 0.6);
+      
+      --accent-flame: #ff3b00;
+      --accent-orange: #ff5500;
+      --accent-amber: #ff8c00;
+      --accent-crimson: #e63946;
+      --accent-gold: #ffd700;
+      --accent-cyan: #00f0ff;
+      --accent-green: #10b981;
+      
+      --text-main: #ffffff;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+      
+      --glow-flame: 0 0 35px rgba(255, 59, 0, 0.4);
+      --glow-cyan: 0 0 35px rgba(0, 240, 255, 0.35);
+      --shadow-card: 0 20px 40px -15px rgba(0, 0, 0, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 59, 0, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Ambient background grid */
+    .bg-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 50px 50px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header / Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(10, 8, 18, 0.85);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-crown {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-flame), var(--accent-amber));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 0 20px rgba(255, 59, 0, 0.5);
+    }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #fff, #ff8c00);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      background: rgba(255, 59, 0, 0.2);
+      border: 1px solid var(--accent-flame);
+      color: #ff8c00;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-left: 0.4rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    .btn-launch-header {
+      background: linear-gradient(135deg, var(--accent-flame), var(--accent-orange));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.6rem 1.4rem;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-size: 0.9rem;
+      box-shadow: var(--glow-flame);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-launch-header:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 30px rgba(255, 59, 0, 0.7);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 4.5rem 0 3.5rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 59, 0, 0.12);
+      border: 1px solid rgba(255, 59, 0, 0.35);
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      color: #ffaa55;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, #ff6b35 70%, #ff8c00 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-flame), var(--accent-orange));
+      color: #fff;
+      font-weight: 700;
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-size: 1.05rem;
+      box-shadow: var(--glow-flame);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 40px rgba(255, 59, 0, 0.7);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+    }
+
+    .stat-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.15rem;
+    }
+
+    .stat-item p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Interactive Preview Card */
+    .preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .preview-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .live-tag {
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      padding: 0.1rem 0.5rem;
+      border-radius: var(--radius-full);
+    }
+
+    /* Mini Chess Board */
+    .board-container {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      aspect-ratio: 1 / 1;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      border: 3px solid #2d183d;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      user-select: none;
+    }
+
+    .square {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .square.light {
+      background-color: #e2d6b5;
+      color: #1a1a1a;
+    }
+
+    .square.dark {
+      background-color: #8b5a2b;
+      color: #1a1a1a;
+    }
+
+    .square.selected {
+      background-color: #ff9f1c !important;
+    }
+
+    .square:hover {
+      filter: brightness(1.15);
+    }
+
+    .preview-footer {
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .turn-indicator {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-reset-board {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-reset-board:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Languages Breakdown Section */
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-size: 1.05rem;
+    }
+
+    .languages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .lang-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lang-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-bright);
+      transform: translateY(-4px);
+    }
+
+    .lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .lang-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .lang-percent {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .lang-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #fff;
+    }
+
+    .lang-role {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      line-height: 1.45;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 1s ease-in-out;
+    }
+
+    /* Feature Highlights */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin-bottom: 5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 85, 0, 0.5);
+      box-shadow: 0 15px 35px rgba(255, 59, 0, 0.15);
+    }
+
+    .feature-icon-wrapper {
+      width: 54px;
+      height: 54px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 59, 0, 0.15);
+      border: 1px solid rgba(255, 59, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Dual Platform Showcase Banner */
+    .banner-showcase {
+      background: linear-gradient(135deg, rgba(35, 14, 45, 0.85), rgba(15, 10, 25, 0.95));
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      margin-bottom: 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .banner-content h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .platform-pills {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .platform-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass);
+      padding: 3rem 0;
+      background: rgba(10, 8, 18, 0.9);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 0;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .banner-showcase {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 0.8rem 1rem;
+      }
+      nav a {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .quick-stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      .board-container {
+        max-width: 320px;
+      }
+      .square {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <!-- Header -->
+  <header id="site-header">
+    <a href="#" class="brand">
+      <div class="brand-crown">♚</div>
+      <div>
+        <span class="brand-text">ChessX 3D</span>
+        <span class="brand-badge">Next-Gen</span>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#preview">Interactive Board</a>
+      <a href="#languages">Tech & Languages</a>
+      <a href="#features">Features</a>
+      <a href="#platforms">Platforms</a>
+    </nav>
+
+    <a href="/index.html" class="btn-launch-header" id="btn-launch-header">
+      <span>Play 3D Web</span>
+      <span>→</span>
+    </a>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-left">
+        <div class="hero-tag">
+          <span class="pulse-dot"></span>
+          <span>Ultra-Fast Lightweight Showcase</span>
+        </div>
+        <h1 class="hero-title">
+          Master the Board in <br />
+          <span class="gradient-text">Stunning 3D Space</span>
+        </h1>
+        <p class="hero-desc">
+          Powered by React 18, Three.js, React Three Fiber, and Minimax AI. Play seamlessly in real-time 3D environments, train tactics, and challenge intelligent bots.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/index.html" class="btn-primary" id="hero-btn-play">
+            <span>⚡ Launch Full 3D Game</span>
+          </a>
+          <a href="#preview" class="btn-secondary" id="hero-btn-tactics">
+            <span>♟️ Try Instant Tactics</span>
+          </a>
+        </div>
+
+        <div class="quick-stats">
+          <div class="stat-item">
+            <h4 id="stat-speed">&lt; 50ms</h4>
+            <p>Fast Load Time</p>
+          </div>
+          <div class="stat-item">
+            <h4>3 Levels</h4>
+            <p>Minimax AI Engine</p>
+          </div>
+          <div class="stat-item">
+            <h4>Dual Engine</h4>
+            <p>Web 3D + Flutter App</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Interactive Mini Board -->
+      <div class="preview-card" id="preview">
+        <div class="preview-header">
+          <div class="preview-title">
+            <span>Interactive Mini-Board</span>
+            <span class="live-tag">ZERO LAG</span>
+          </div>
+          <button class="btn-reset-board" id="btn-reset">Reset</button>
+        </div>
+
+        <div class="board-container" id="chess-board">
+          <!-- 64 squares rendered via JS -->
+        </div>
+
+        <div class="preview-footer">
+          <div class="turn-indicator">
+            <span id="turn-dot" style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#fff;"></span>
+            <span id="turn-text">White to move. Click any piece!</span>
+          </div>
+          <button class="btn-reset-board" id="btn-ai-move" title="Let AI respond">Bot Move 🤖</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Languages Breakdown Section -->
+    <section id="languages" style="padding-top: 2rem;">
+      <h2 class="section-title">Languages & Architecture</h2>
+      <p class="section-sub">
+        Explore the multi-tier technology stack powering both the high-performance Three.js Web application and Flutter mobile client.
+      </p>
+
+      <div class="languages-grid">
+        <!-- JavaScript / JSX -->
+        <div class="lang-card">
+          <div class="lang-header">
+            <div class="lang-icon" style="background: rgba(247, 223, 30, 0.15); color: #f7df1e; border: 1px solid rgba(247, 223, 30, 0.3);">
+              JS
+            </div>
+            <div class="lang-percent" style="color: #f7df1e;">~72%</div>
+          </div>
+          <h3 class="lang-name">JavaScript & JSX</h3>
+          <p class="lang-role">
+            React 18 frontend, Three.js & React Three Fiber 3D scene graphs, custom chess rules engine, Minimax AI with alpha-beta pruning, Web Audio synthesizer.
+          </p>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 72%; background: linear-gradient(90deg, #f7df1e, #ff8c00);"></div>
+          </div>
+        </div>
+
+        <!-- Three.js & WebGL -->
+        <div class="lang-card">
+          <div class="lang-header">
+            <div class="lang-icon" style="background: rgba(0, 240, 255, 0.15); color: #00f0ff; border: 1px solid rgba(0, 240, 255, 0.3);">
+              3D
+            </div>
+            <div class="lang-percent" style="color: #00f0ff;">WebGL</div>
+          </div>
+          <h3 class="lang-name">Three.js & R3F</h3>
+          <p class="lang-role">
+            Interactive 3D board rendering, raycasted piece picking, dynamic directional shadows, Earth-Sun daylight system, and orbit camera controls.
+          </p>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 85%; background: linear-gradient(90deg, #00b4ff, #00f0ff);"></div>
+          </div>
+        </div>
+
+        <!-- CSS3 -->
+        <div class="lang-card">
+          <div class="lang-header">
+            <div class="lang-icon" style="background: rgba(255, 59, 0, 0.15); color: #ff5500; border: 1px solid rgba(255, 59, 0, 0.3);">
+              CSS
+            </div>
+            <div class="lang-percent" style="color: #ff5500;">~12%</div>
+          </div>
+          <h3 class="lang-name">CSS3 & Styling</h3>
+          <p class="lang-role">
+            Obsidian flame dark theme, custom glassmorphism, responsive grid layouts, ambient lighting keyframe animations, and custom scrollbars.
+          </p>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 12%; background: linear-gradient(90deg, #ff3b00, #ff8c00);"></div>
+          </div>
+        </div>
+
+        <!-- HTML5 & Config -->
+        <div class="lang-card">
+          <div class="lang-header">
+            <div class="lang-icon" style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
+              HTML
+            </div>
+            <div class="lang-percent" style="color: #10b981;">~6%</div>
+          </div>
+          <h3 class="lang-name">HTML5 & Web API</h3>
+          <p class="lang-role">
+            Semantic HTML5 structure, OpenGraph preview cards, Web Audio API procedural synthesis, and Vite fast HMR development configuration.
+          </p>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width: 6%; background: linear-gradient(90deg, #10b981, #00f0ff);"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features Grid -->
+    <section id="features">
+      <h2 class="section-title">Cutting-Edge Features</h2>
+      <p class="section-sub">
+        Every detail engineered for performance, precision, and visual excellence.
+      </p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">🪐</div>
+            <h3>3D Dynamic Environments</h3>
+            <p>
+              Switch dynamically between Earth Sun, Deep Nebula, and Midnight Torchlight modes with realistic Three.js point lights and directional shadows.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">🧠</div>
+            <h3>Minimax AI Engine</h3>
+            <p>
+              Challenge 3 calibrated AI difficulty levels (Casual, Tactical, Grandmaster) with alpha-beta pruning, piece-square tables, and opening books.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">🔊</div>
+            <h3>Synthesized Audio & VFX</h3>
+            <p>
+              Zero external audio file lag: real-time Web Audio API procedural synthesis for crisp piece moves, captures, checks, and confetti victory particles.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">📊</div>
+            <h3>Real-Time Eval & Openings</h3>
+            <p>
+              Live dynamic evaluation bar calculated each turn alongside automatic opening classification (Sicilian, Ruy Lopez, Queen's Gambit, etc.).
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">📖</div>
+            <h3>Opening Explorer</h3>
+            <p>
+              Real-time classification with over 30 classic openings (Sicilian Defense, Ruy Lopez, Queen's Gambit, French, etc.) plus move notation history.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div>
+            <div class="feature-icon-wrapper">⚡</div>
+            <h3>Ultra-Lightweight Core</h3>
+            <p>
+              Instant page responsiveness, sub-second boot times, and responsive glassmorphic UI optimized for desktop, tablets, and phones.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Showcase Banner -->
+    <section id="platforms" class="banner-showcase">
+      <div class="banner-content">
+        <h2>Ready to Play ChessX 3D?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Jump straight into the full 3D interactive chessboard or explore the codebase on your local machine.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="/index.html" class="btn-primary">
+            <span>Play 3D Web App</span>
+            <span>→</span>
+          </a>
+          <a href="#hero" class="btn-secondary">
+            <span>Back to Top ↑</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="platform-pills">
+          <div class="platform-pill">🌐 React 18 & Three.js</div>
+          <div class="platform-pill">🪐 React Three Fiber (R3F)</div>
+          <div class="platform-pill">🤖 AI Engine (Minimax)</div>
+          <div class="platform-pill">⚡ Fast Vite Server</div>
+          <div class="platform-pill">🔐 Google Identity Auth</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="#hero">Overview</a>
+        <a href="#languages">Languages</a>
+        <a href="#features">Features</a>
+        <a href="/index.html">Launch 3D App</a>
+      </div>
+      <p>© 2026 ChessX 3D Platform. Engineered with React 18, Three.js, JavaScript, and CSS3.</p>
+    </div>
+  </footer>
+
+  <!-- Embedded Zero-Dependency Mini Chess Logic & Audio Synthesizer -->
+  <script>
+    // Procedural Audio Synthesizer via Web Audio API (Zero lag, zero external assets)
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      playMove() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(140, this.ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.3, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.08);
+        } catch(e) {}
+      },
+      playCapture() {
+        try {
+          this.init();
+          if (!this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(540, this.ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(90, this.ctx.currentTime + 0.12);
+          gain.gain.setValueAtTime(0.4, this.ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start();
+          osc.stop(this.ctx.currentTime + 0.12);
+        } catch(e) {}
+      }
+    };
+
+    // Lightweight Standalone Chess Board Representation
+    const INITIAL_BOARD = [
+      ['♜','♞','♝','♛','♚','♝','♞','♜'],
+      ['♟','♟','♟','♟','♟','♟','♟','♟'],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['','','','','','','',''],
+      ['♙','♙','♙','♙','♙','♙','♙','♙'],
+      ['♖','♘','♗','♕','♔','♗','♘','♖']
+    ];
+
+    let boardState = JSON.parse(JSON.stringify(INITIAL_BOARD));
+    let selectedSquare = null;
+    let turn = 'w'; // 'w' or 'b'
+
+    const boardEl = document.getElementById('chess-board');
+    const turnTextEl = document.getElementById('turn-text');
+    const turnDotEl = document.getElementById('turn-dot');
+
+    function isWhite(piece) {
+      return ['♙','♖','♘','♗','♕','♔'].includes(piece);
+    }
+    function isBlack(piece) {
+      return ['♟','♜','♞','♝','♛','♚'].includes(piece);
+    }
+
+    function renderBoard() {
+      boardEl.innerHTML = '';
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const sq = document.createElement('div');
+          const isDark = (r + c) % 2 === 1;
+          sq.className = `square ${isDark ? 'dark' : 'light'}`;
+          sq.dataset.row = r;
+          sq.dataset.col = c;
+          sq.id = `sq-${r}-${c}`;
+
+          const piece = boardState[r][c];
+          sq.textContent = piece;
+
+          if (selectedSquare && selectedSquare.r === r && selectedSquare.c === c) {
+            sq.classList.add('selected');
+          }
+
+          sq.addEventListener('click', () => handleSquareClick(r, c));
+          boardEl.appendChild(sq);
+        }
+      }
+
+      // Update UI turn text
+      if (turn === 'w') {
+        turnTextEl.textContent = "White to move. Click any piece!";
+        turnDotEl.style.background = '#ffffff';
+        turnDotEl.style.boxShadow = '0 0 8px #ffffff';
+      } else {
+        turnTextEl.textContent = "Black to move. Click or trigger Bot!";
+        turnDotEl.style.background = '#ff5500';
+        turnDotEl.style.boxShadow = '0 0 8px #ff5500';
+      }
+    }
+
+    function handleSquareClick(r, c) {
+      const clickedPiece = boardState[r][c];
+      
+      // If nothing selected
+      if (!selectedSquare) {
+        if (!clickedPiece) return;
+        if ((turn === 'w' && isWhite(clickedPiece)) || (turn === 'b' && isBlack(clickedPiece))) {
+          selectedSquare = { r, c };
+          renderBoard();
+        }
+        return;
+      }
+
+      // If clicked same square, deselect
+      if (selectedSquare.r === r && selectedSquare.c === c) {
+        selectedSquare = null;
+        renderBoard();
+        return;
+      }
+
+      // If clicked another piece of own color, switch selection
+      if (clickedPiece && ((turn === 'w' && isWhite(clickedPiece)) || (turn === 'b' && isBlack(clickedPiece)))) {
+        selectedSquare = { r, c };
+        renderBoard();
+        return;
+      }
+
+      // Execute move
+      const movingPiece = boardState[selectedSquare.r][selectedSquare.c];
+      const targetPiece = boardState[r][c];
+
+      if (targetPiece) {
+        AudioEngine.playCapture();
+      } else {
+        AudioEngine.playMove();
+      }
+
+      boardState[r][c] = movingPiece;
+      boardState[selectedSquare.r][selectedSquare.c] = '';
+      selectedSquare = null;
+      turn = (turn === 'w') ? 'b' : 'w';
+      renderBoard();
+    }
+
+    // AI Bot Move Generator
+    function makeAIMove() {
+      const moves = [];
+      const currentIsWhite = (turn === 'w');
+
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const piece = boardState[r][c];
+          if (!piece) continue;
+          if (currentIsWhite && !isWhite(piece)) continue;
+          if (!currentIsWhite && !isBlack(piece)) continue;
+
+          // Simple candidate steps for preview
+          const deltas = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1],[2,1],[1,2],[-1,2],[-2,1]];
+          for (const [dr, dc] of deltas) {
+            const tr = r + dr;
+            const tc = c + dc;
+            if (tr >= 0 && tr < 8 && tc >= 0 && tc < 8) {
+              const target = boardState[tr][tc];
+              if (!target || (currentIsWhite ? isBlack(target) : isWhite(target))) {
+                moves.push({ from: {r, c}, to: {r: tr, c: tc}, target });
+              }
+            }
+          }
+        }
+      }
+
+      if (moves.length > 0) {
+        // Prioritize capture if available
+        const captureMoves = moves.filter(m => m.target !== '');
+        const chosen = captureMoves.length > 0 
+          ? captureMoves[Math.floor(Math.random() * captureMoves.length)]
+          : moves[Math.floor(Math.random() * moves.length)];
+
+        if (chosen.target) AudioEngine.playCapture();
+        else AudioEngine.playMove();
+
+        boardState[chosen.to.r][chosen.to.c] = boardState[chosen.from.r][chosen.from.c];
+        boardState[chosen.from.r][chosen.from.c] = '';
+        selectedSquare = null;
+        turn = (turn === 'w') ? 'b' : 'w';
+        renderBoard();
+      }
+    }
+
+    // Reset board
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      boardState = JSON.parse(JSON.stringify(INITIAL_BOARD));
+      selectedSquare = null;
+      turn = 'w';
+      renderBoard();
+    });
+
+    // Bot move button
+    document.getElementById('btn-ai-move').addEventListener('click', () => {
+      makeAIMove();
+    });
+
+    // Initial Render
+    renderBoard();
+  </script>
+</body>
+</html>
+

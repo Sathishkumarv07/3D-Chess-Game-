@@ -18,6 +18,7 @@ export function ChessCanvas({
   setBgEnvironment,
   isTorchOn = false,
   setIsTorchOn,
+  lowSpecMode = false,
   onSquareClick,
   onPieceClick
 }) {
@@ -41,6 +42,7 @@ export function ChessCanvas({
             position={[posX, 0.1, posZ]}
             isSelected={isSelected}
             isPossibleTarget={isPossibleTarget}
+            lowSpecMode={lowSpecMode}
             onClick={() => onPieceClick(row, col)}
           />
         );
@@ -177,13 +179,20 @@ export function ChessCanvas({
 
       {/* 3D Canvas R3F */}
       <Canvas
-        shadows
+        shadows={!lowSpecMode}
+        dpr={lowSpecMode ? 1 : [1, 1.5]}
         camera={{ position: [0, 7.5, 7.5], fov: 50 }}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
+        gl={{
+          antialias: !lowSpecMode,
+          alpha: true,
+          powerPreference: lowSpecMode ? 'low-power' : 'default',
+          precision: lowSpecMode ? 'mediump' : 'highp'
+        }}
       >
         <EnvironmentLighting
           bgEnvironment={bgEnvironment}
           isTorchOn={isTorchOn}
+          lowSpecMode={lowSpecMode}
         />
 
         <ChessBoard3D
@@ -193,6 +202,7 @@ export function ChessCanvas({
           lastMove={lastMove}
           kingInCheckPos={kingInCheckPos}
           theme={theme}
+          lowSpecMode={lowSpecMode}
           onSquareClick={onSquareClick}
         />
 
