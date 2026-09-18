@@ -288,6 +288,202 @@ const LESSONS = [
       validMove: { from: { r: 3, c: 1 }, to: { r: 2, c: 1 } },
       symbols: { wK: '♔', bK: '♚' }
     }
+  },
+  {
+    id: 'smothered_mate',
+    category: 'tactics',
+    title: 'The Smothered Checkmate',
+    description: 'Suffocate an enemy King who is completely boxed in and blocked by his own friendly pieces.',
+    difficulty: 'Advanced',
+    time: '8 min',
+    icon: <Award size={20} />,
+    color: '#a855f7',
+    content: `
+      <h3>The Philidor Legacy</h3>
+      <p>A smothered mate occurs when a Knight delivers check to a King who cannot move because all neighboring escape squares are choked by his own pieces.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Jump your <strong>White Knight</strong> forward into position to deliver an unstoppable smothered checkmate to the cornered Black King!</p>
+    `,
+    checkup: {
+      prompt: 'Jump your Knight to (row 1, col 1) to execute smothered mate!',
+      initialBoard: [
+        ['', '', 'bR', 'bK'],
+        ['', '', 'bP', 'bP'],
+        ['', '', '', ''],
+        ['wN', '', '', '']
+      ],
+      validMove: { from: { r: 3, c: 0 }, to: { r: 1, c: 1 } },
+      symbols: { wN: '♘', bK: '♚', bR: '♜', bP: '♟' }
+    }
+  },
+  {
+    id: 'queen_sacrifice',
+    category: 'tactics',
+    title: 'The Decoy Queen Sacrifice',
+    description: 'Shatter enemy fortifications by sacrificing your most powerful piece to lure the King into forced mate.',
+    difficulty: 'Advanced',
+    time: '10 min',
+    icon: <Award size={20} />,
+    color: '#ff007f',
+    content: `
+      <h3>Decoy & Destruction</h3>
+      <p>Sometimes the most brilliant move is giving up your Queen. By sacrificing the Queen on the back rank, you forcefully deflect the King or defender, sealing immediate mate.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Sacrifice your <strong>White Queen</strong> by plunging deep onto the 8th rank to shatter Black\'s defense!</p>
+    `,
+    checkup: {
+      prompt: 'Move your Queen to the 8th rank to force the breakthrough!',
+      initialBoard: [
+        ['', '', '', 'bK'],
+        ['', '', 'bP', 'bP'],
+        ['', 'wQ', '', ''],
+        ['wR', '', '', '']
+      ],
+      validMove: { from: { r: 2, c: 1 }, to: { r: 0, c: 3 } },
+      symbols: { wQ: '♕', bK: '♚', bP: '♟', wR: '♖' }
+    }
+  },
+  {
+    id: 'scholars_defense',
+    category: 'openings',
+    title: 'Punishing Early Queen Attacks',
+    description: 'Refute overaggressive beginner attacks like Scholar\'s Mate by developing pieces with tempo.',
+    difficulty: 'Beginner',
+    time: '6 min',
+    icon: <BookOpen size={20} />,
+    color: '#22c55e',
+    content: `
+      <h3>Never Bring the Queen Out Too Early</h3>
+      <p>Beginners often rush their Queen out on move 2 or 3 trying for quick mates. The golden remedy is simple: develop minor pieces that simultaneously defend and harass the enemy Queen!</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Develop your <strong>Black Knight</strong> forward to attack the overextended White Queen while defending key squares!</p>
+    `,
+    checkup: {
+      prompt: 'Develop your Knight forward to attack the premature White Queen!',
+      initialBoard: [
+        ['', 'bK', '', ''],
+        ['', 'bP', '', ''],
+        ['', '', 'wQ', ''],
+        ['', 'bN', '', '']
+      ],
+      validMove: { from: { r: 3, c: 1 }, to: { r: 1, c: 2 } },
+      symbols: { bN: '♞', wQ: '♕', bK: '♚', bP: '♟' }
+    }
+  },
+  {
+    id: 'zwischenzug',
+    category: 'tactics',
+    title: 'Zwischenzug: The In-Between Move',
+    description: 'Turn a routine piece trade into a game-winning advantage by inserting an intermediate surprise check.',
+    difficulty: 'Intermediate',
+    time: '9 min',
+    icon: <Award size={20} />,
+    color: '#eab308',
+    content: `
+      <h3>The Art of the Intermezzo</h3>
+      <p>Instead of playing the expected recapture, a master searches for an intermediate check or threat (Zwischenzug) that completely turns the tactical balance.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Deliver an in-between check with your <strong>White Bishop</strong> along the open diagonal before completing the trade!</p>
+    `,
+    checkup: {
+      prompt: 'Slide your Bishop across to deliver intermediate check on the King!',
+      initialBoard: [
+        ['', '', '', 'bK'],
+        ['', '', 'bQ', ''],
+        ['', '', '', ''],
+        ['wB', '', '', '']
+      ],
+      validMove: { from: { r: 3, c: 0 }, to: { r: 1, c: 2 } },
+      symbols: { wB: '♗', bK: '♚', bQ: '♛' }
+    }
+  },
+  {
+    id: 'absolute_pin',
+    category: 'tactics',
+    title: 'Exploiting the Absolute Pin',
+    description: 'A piece shielding its King is absolutely pinned and paralyzed. Exploit this by attacking it with lesser pawns.',
+    difficulty: 'Intermediate',
+    time: '7 min',
+    icon: <Award size={20} />,
+    color: '#06b6d4',
+    content: `
+      <h3>The Paralyzed Piece</h3>
+      <p>Under official chess rules, a piece pinned against its King cannot legally move. The golden rule: attack the pinned piece with a pawn of lower value!</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Advance your <strong>White Pawn</strong> one square to attack the pinned Black Rook!</p>
+    `,
+    checkup: {
+      prompt: 'Push your Pawn forward to attack the immobilized pinned Rook!',
+      initialBoard: [
+        ['', '', '', 'bK'],
+        ['', '', 'bR', ''],
+        ['', 'wP', '', ''],
+        ['', '', 'wR', '']
+      ],
+      validMove: { from: { r: 2, c: 1 }, to: { r: 1, c: 1 } },
+      symbols: { wP: '♙', bR: '♜', bK: '♚', wR: '♖' }
+    }
+  },
+  {
+    id: 'king_outflanking',
+    category: 'endgames',
+    title: 'Outflanking & Shoulder Blocks',
+    description: 'Force your opponent\'s King to yield ground in pure pawn endgames through precise diagonal steps.',
+    difficulty: 'Advanced',
+    time: '10 min',
+    icon: <Play size={20} />,
+    color: '#f97316',
+    content: `
+      <h3>Shouldering the Enemy King</h3>
+      <p>Once you hold opposition, taking a diagonal step (outflanking) forces the opposing King to retreat or step aside, opening a highway for your passed pawn.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Step your <strong>White King</strong> diagonally to outflank the Black King and clear the corridor!</p>
+    `,
+    checkup: {
+      prompt: 'Move your King diagonally forward to outflank the defender!',
+      initialBoard: [
+        ['', 'bK', '', ''],
+        ['', 'wK', '', ''],
+        ['', 'wP', '', ''],
+        ['', '', '', '']
+      ],
+      validMove: { from: { r: 1, c: 1 }, to: { r: 0, c: 2 } },
+      symbols: { wK: '♔', bK: '♚', wP: '♙' }
+    }
+  },
+  {
+    id: 'history_world',
+    category: 'history',
+    title: 'From Chaturanga to the World',
+    description: 'Explore the 1,500-year evolution of chess from 6th-century Indian Chaturanga to global competition.',
+    difficulty: 'Beginner',
+    time: '5 min',
+    icon: <Compass size={20} />,
+    color: '#d4af37',
+    content: `
+      <h3>The Global Journey of Chess</h3>
+      <p>Chess originated in India around the 6th century as <em>Chaturanga</em> (meaning four military divisions: Infantry, Cavalry, Elephants, and Chariots). It migrated to Persia as <em>Shatranj</em>, spread through the Arab world, and reached Renaissance Europe where the Queen and Bishop gained modern power.</p>
+      <br/>
+      <h4>Your Checkup Task:</h4>
+      <p>Advance your ancient Indian <strong>Ratha (Chariot/Rook)</strong> across the rank to stake your claim on the global battlefield!</p>
+    `,
+    checkup: {
+      prompt: 'Slide your Rook across to the opposite corner of the rank!',
+      initialBoard: [
+        ['', '', '', 'bK'],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['wR', '', '', '']
+      ],
+      validMove: { from: { r: 3, c: 0 }, to: { r: 3, c: 3 } },
+      symbols: { wR: '♖', bK: '♚' }
+    }
   }
 ];
 
@@ -452,7 +648,7 @@ export function AcademyView() {
         marginBottom: '2.5rem',
         flexWrap: 'wrap'
       }}>
-        {['all', 'basics', 'openings', 'tactics', 'endgames'].map((cat) => (
+        {['all', 'basics', 'openings', 'tactics', 'endgames', 'history'].map((cat) => (
           <button
             key={cat}
             onClick={() => { sounds.playClick(); setFilter(cat); }}

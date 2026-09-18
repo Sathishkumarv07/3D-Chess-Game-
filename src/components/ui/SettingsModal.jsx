@@ -31,6 +31,15 @@ export function SettingsModal({
     { id: 'studio', name: '🎨 Minimalist Studio Lightbox', desc: 'Clean studio shadow plane' },
     { id: 'zen_garden', name: '🌿 Zen Stone Sanctuary', desc: 'Slate slab & emerald ambient' },
     { id: 'space', name: '🌌 Cosmic Deep Space', desc: 'Starfield & dragonfruit sparkles' },
+    // World Tour Cultural Environments
+    { id: 'india_palace', name: '🇮🇳 Chaturanga Royal Palace', desc: 'Indian marble dais & palace gold' },
+    { id: 'japan_zen', name: '🇯🇵 Kyoto Zen Temple', desc: 'Serene dark tatami & falling sakura' },
+    { id: 'russia_hall', name: '🇷🇺 Soviet Grandmaster Hall', desc: 'Walnut stage & championship spotlights' },
+    { id: 'iceland_frost', name: '🇮🇸 Reykjavik Frost Arena', desc: 'Glacial ice pedestal & aurora borealis' },
+    { id: 'egypt_pharaoh', name: '🇪🇬 Pharaoh\'s Obsidian Tomb', desc: 'Ancient sandstone & golden torches' },
+    { id: 'england_club', name: '🇬🇧 London Victorian Parlor', desc: 'Antique rosewood & hearth fire warmth' },
+    { id: 'france_bistro', name: '🇫🇷 Café de la Régence', desc: 'Parisian Carrara marble & twilight glow' },
+    { id: 'brazil_rio', name: '🇧🇷 Copacabana Samba Arena', desc: 'Tropical rainforest & golden sun' },
   ];
 
   return (
@@ -182,7 +191,16 @@ export function SettingsModal({
               { id: 'emerald', name: 'Emerald Crystal', color: '#2d6a4f' },
               { id: 'marble', name: 'Royal Gold & Marble', color: '#ffd700' },
               { id: 'ocean', name: 'Ocean Sapphire Blue', color: '#0369a1' },
-              { id: 'charcoal', name: 'Onyx & Slate Charcoal', color: '#3f3f46' }
+              { id: 'charcoal', name: 'Onyx & Slate Charcoal', color: '#3f3f46' },
+              // World Tour Cultural Themes
+              { id: 'india_palace', name: '🇮🇳 India: Chaturanga Palace', color: '#d4af37' },
+              { id: 'japan_zen', name: '🇯🇵 Japan: Kyoto Zen Bamboo', color: '#e8dcbe' },
+              { id: 'russia_hall', name: '🇷🇺 Russia: Moscow Walnut Hall', color: '#461e10' },
+              { id: 'iceland_frost', name: '🇮🇸 Iceland: Reykjavik Ice', color: '#00e5ff' },
+              { id: 'egypt_pharaoh', name: '🇪🇬 Egypt: Obsidian & Gold', color: '#eab308' },
+              { id: 'england_club', name: '🇬🇧 England: Victorian Boxwood', color: '#b45309' },
+              { id: 'france_bistro', name: '🇫🇷 France: Paris Bistro Marble', color: '#334155' },
+              { id: 'brazil_rio', name: '🇧🇷 Brazil: Copacabana Emerald', color: '#15803d' },
             ].map((themeItem) => (
               <button
                 key={themeItem.id}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Volume2, VolumeX, Settings, User, LogOut, ChevronDown, BookOpen, Zap } from 'lucide-react';
+import { Volume2, VolumeX, Settings, User, LogOut, ChevronDown, BookOpen, Zap, Globe } from 'lucide-react';
 import { sounds } from '../../audio/soundSystem';
 import { useAuth } from '../../context/AuthContext';
 
@@ -90,6 +90,13 @@ export function Navbar({ activeTab, setActiveTab, soundMuted, setSoundMuted, low
           onClick={() => { sounds.playClick(); setActiveTab('academy'); }}
         >
           Tutorials
+        </li>
+        <li
+          className={`nav-item ${activeTab === 'worldtour' ? 'active' : ''}`}
+          style={{ padding: '5px 11px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+          onClick={() => { sounds.playClick(); setActiveTab('worldtour'); }}
+        >
+          <Globe size={13} /> World Tour
         </li>
         <li
           className={`nav-item ${activeTab === 'leaderboard' ? 'active' : ''}`}

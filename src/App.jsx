@@ -16,12 +16,14 @@ import { LoginModal } from './components/ui/LoginModal';
 import { PuzzleView } from './components/ui/PuzzleView';
 import { ProfileView } from './components/ui/ProfileView';
 import { AcademyView } from './components/ui/AcademyView';
+import { WorldTourView } from './components/ui/WorldTourView';
 import { Footer } from './components/ui/Footer';
 import { EvalBar } from './components/ui/EvalBar';
 import { AchievementToast } from './components/ui/AchievementToast';
 import { TIME_CONTROLS } from './components/ui/ChessClock';
 import { ChessCanvas } from './components/3d/ChessCanvas';
 import { detectOpening } from './data/openings';
+import { recordPassportWin } from './data/worldTour';
 
 export default function App() {
   const { recordGame } = useStats();
@@ -76,6 +78,7 @@ export default function App() {
   const [isOnlineModalOpen, setIsOnlineModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen]   = useState(false);
   const [eloChangeResult, setEloChangeResult]     = useState(null);
+  const [worldTourCountry, setWorldTourCountry]   = useState(null);
 
   // ── Board state ─────────────────────────────────────────────────────────────
   const [selectedSquare, setSelectedSquare] = useState(null);
@@ -120,17 +123,19 @@ export default function App() {
   }, [recordGame]);
 
   // ── Precise endGame that reads current game state via a ref ─────────────────
-  const gameRef        = useRef(game);
-  const gameModeRef    = useRef(gameMode);
-  const aiDiffRef      = useRef(aiDifficulty);
-  const timeControlRef = useRef(timeControl);
-  const startTimeRef   = useRef(gameStartTime);
+  const gameRef             = useRef(game);
+  const gameModeRef         = useRef(gameMode);
+  const aiDiffRef           = useRef(aiDifficulty);
+  const timeControlRef      = useRef(timeControl);
+  const startTimeRef        = useRef(gameStartTime);
+  const worldTourCountryRef = useRef(worldTourCountry);
 
-  useEffect(() => { gameRef.current        = game;        }, [game]);
-  useEffect(() => { gameModeRef.current    = gameMode;    }, [gameMode]);
-  useEffect(() => { aiDiffRef.current      = aiDifficulty;}, [aiDifficulty]);
-  useEffect(() => { timeControlRef.current = timeControl; }, [timeControl]);
-  useEffect(() => { startTimeRef.current   = gameStartTime; }, [gameStartTime]);
+  useEffect(() => { gameRef.current             = game;             }, [game]);
+  useEffect(() => { gameModeRef.current         = gameMode;         }, [gameMode]);
+  useEffect(() => { aiDiffRef.current           = aiDifficulty;     }, [aiDifficulty]);
+  useEffect(() => { timeControlRef.current      = timeControl;      }, [timeControl]);
+  useEffect(() => { startTimeRef.current        = gameStartTime;    }, [gameStartTime]);
+  useEffect(() => { worldTourCountryRef.current = worldTourCountry; }, [worldTourCountry]);
 
   const endGameFull = useCallback((result, status) => {
     setResultStatus(status);
@@ -141,6 +146,11 @@ export default function App() {
     const diff      = aiDiffRef.current;
     const tc        = timeControlRef.current;
     const startTime = startTimeRef.current;
+    const wtCountry = worldTourCountryRef.current;
+
+    if (result === 'win' && wtCountry) {
+      recordPassportWin(wtCountry.id);
+    }
 
     const duration = startTime
       ? (() => { const s = Math.floor((Date.now() - startTime) / 1000); return `${Math.floor(s/60)}m ${s%60}s`; })()
@@ -150,13 +160,21 @@ export default function App() {
     const opening = (() => { try { const o = detectOpening(sans); return o?.name || '—'; } catch { return '—'; } })();
     const modeId  = tc?.id || 'unlimited';
 
+    const opponent = wtCountry
+      ? `${wtCountry.flag} ${wtCountry.master.name}`
+      : gMode === 'ai' ? `ChessX Bot (${diff.toUpperCase()})` : 'Local Player';
+
+    const opponentElo = wtCountry
+      ? wtCountry.master.rating
+      : gMode === 'ai' ? (diff === 'difficult' || diff === 'master' ? 1800 : diff === 'hard' || diff === 'club' ? 1400 : 800) : 1200;
+
     const { eloChange, newElo } = recordGame(result, {
-      opponent:    gMode === 'ai' ? `ChessX Bot (${diff.toUpperCase()})` : 'Local Player',
+      opponent,
       moves:       sans.length,
       duration,
       opening,
       mode:        modeId.includes('bullet') ? 'bullet' : modeId.includes('blitz') ? 'blitz' : modeId.includes('rapid') ? 'rapid' : 'classical',
-      opponentElo: gMode === 'ai' ? (diff === 'difficult' || diff === 'master' ? 1800 : diff === 'hard' || diff === 'club' ? 1400 : 800) : 1200,
+      opponentElo,
     });
     setEloChangeResult({ change: eloChange, newElo });
   }, [recordGame]);
@@ -281,11 +299,12 @@ export default function App() {
   }, [game, gameMode, activeTab, isGameOver, triggerAiMove]);
 
   // ── Start a new game ────────────────────────────────────────────────────────
-  const startGameMode = (mode, difficulty = 'master') => {
+  const startGameMode = (mode, difficulty = 'master', wtCountry = null) => {
     const newGame = new ChessGame();
     setGame(newGame);
     setGameMode(mode);
     setAiDifficulty(difficulty);
+    setWorldTourCountry(wtCountry);
     setSelectedSquare(null);
     setLegalMoves([]);
     setLastMove(null);
@@ -296,6 +315,13 @@ export default function App() {
     setEloChangeResult(null);
     setGameStartTime(Date.now());
     setActiveTab('game');
+  };
+
+  const handleStartWorldTourMatch = (country) => {
+    setWorldTourCountry(country);
+    setBoardTheme(country.boardTheme);
+    setBgEnvironment(country.environment);
+    startGameMode('ai', country.difficulty, country);
   };
 
   const handleStartOnlineGame = () => startGameMode('online', 'master');
@@ -377,8 +403,9 @@ export default function App() {
               game={game}
               gameMode={gameMode}
               aiDifficulty={aiDifficulty}
+              worldTourCountry={worldTourCountry}
               onUndo={handleUndo}
-              onNewGame={() => startGameMode(gameMode, aiDifficulty)}
+              onNewGame={() => startGameMode(gameMode, aiDifficulty, worldTourCountry)}
               onResign={handleResign}
               timeControl={timeControl}
               onTimeOut={handleTimeOut}
@@ -388,6 +415,7 @@ export default function App() {
           </div>
         )}
 
+        {activeTab === 'worldtour'   && <WorldTourView onStartChallenge={handleStartWorldTourMatch} />}
         {activeTab === 'leaderboard' && <LeaderboardView />}
         {activeTab === 'history'     && <HistoryView />}
         {activeTab === 'puzzles'     && <PuzzleView />}

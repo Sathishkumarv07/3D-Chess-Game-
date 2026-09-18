@@ -8,6 +8,7 @@ export function GameHUD({
   game,
   gameMode,
   aiDifficulty,
+  worldTourCountry = null,
   onUndo,
   onNewGame,
   onResign,
@@ -52,7 +53,9 @@ export function GameHUD({
             }}
           >
             <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--accent-dragonfruit-bright)' }}>
-              {gameMode === 'ai' ? `VS BOT (${aiDifficulty.toUpperCase()})` : 'PASS & PLAY'}
+              {worldTourCountry
+                ? `${worldTourCountry.flag} ${worldTourCountry.name.toUpperCase()} TOUR`
+                : gameMode === 'ai' ? `VS BOT (${aiDifficulty.toUpperCase()})` : 'PASS & PLAY'}
             </div>
             <div style={{ width: '1px', height: '20px', background: 'var(--border-glass)' }} />
             <div style={{ fontSize: '0.88rem', fontWeight: 600, color: materialAdv > 0 ? 'var(--accent-dragonfruit-bright)' : materialAdv < 0 ? 'var(--accent-violet)' : 'var(--text-muted)' }}>
@@ -80,10 +83,18 @@ export function GameHUD({
 
         {/* Black Player Info */}
         <div className="glass-panel player-card">
-          <div className="player-avatar" style={{ borderColor: 'var(--accent-violet)' }}>🏿</div>
+          <div className="player-avatar" style={{ borderColor: worldTourCountry ? worldTourCountry.stampColor : 'var(--accent-violet)' }}>
+            {worldTourCountry ? worldTourCountry.master.avatar : '🏿'}
+          </div>
           <div className="player-info">
-            <span className="player-name">{gameMode === 'ai' ? `ChessX Bot` : 'Player 2 (Black)'}</span>
-            <span className="player-rating">{gameMode === 'ai' ? `Bot (${aiDifficulty})` : 'Rating: 1500'}</span>
+            <span className="player-name">
+              {worldTourCountry ? `${worldTourCountry.flag} ${worldTourCountry.master.name}` : gameMode === 'ai' ? `ChessX Bot` : 'Player 2 (Black)'}
+            </span>
+            <span className="player-rating">
+              {worldTourCountry
+                ? `${worldTourCountry.master.title} (${worldTourCountry.master.rating})`
+                : gameMode === 'ai' ? `Bot (${aiDifficulty})` : 'Rating: 1500'}
+            </span>
           </div>
           {activeColor === 'b' && (
             <span className="turn-badge active-black">Active Turn</span>

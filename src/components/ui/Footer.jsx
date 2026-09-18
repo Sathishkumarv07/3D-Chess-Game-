@@ -71,6 +71,15 @@ export function Footer({ navigateTab }) {
             🎓 Tutorials &amp; Academy
           </a>
           <a
+            href="#worldtour"
+            onClick={handleNav('worldtour')}
+            style={{ color: 'var(--text-dim)', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#00f0ff'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-dim)'}
+          >
+            🌍 World Tour
+          </a>
+          <a
             href="#puzzles"
             onClick={handleNav('puzzles')}
             style={{ color: 'var(--text-dim)', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s' }}

@@ -83,6 +83,71 @@ export function ChessBoard3D({
           labelColor: '#a1a1aa'
         };
 
+      // ── World Tour Country Board Themes ──────────────────────────────────────────
+      case 'india_palace':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#fbf7ee', roughness: 0.2, metalness: 0.15 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#6d4229', roughness: 0.4, metalness: 0.1 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#d4af37', roughness: 0.2, metalness: 0.85, emissive: '#554008', emissiveIntensity: 0.3 }),
+          labelColor: '#d4af37'
+        };
+
+      case 'japan_zen':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#e8dcbe', roughness: 0.5, metalness: 0.05 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#242124', roughness: 0.2, metalness: 0.6 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#4a3828', roughness: 0.4, metalness: 0.3, emissive: '#1f150e', emissiveIntensity: 0.2 }),
+          labelColor: '#e8dcbe'
+        };
+
+      case 'russia_hall':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#e5c29f', roughness: 0.35, metalness: 0.08 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#461e10', roughness: 0.4, metalness: 0.15 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#261208', roughness: 0.5, metalness: 0.2, emissive: '#140804', emissiveIntensity: 0.15 }),
+          labelColor: '#f1d5b3'
+        };
+
+      case 'iceland_frost':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#e0f7fa', roughness: 0.1, metalness: 0.4 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#006064', roughness: 0.15, metalness: 0.6 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#00e5ff', roughness: 0.1, metalness: 0.9, emissive: '#004c54', emissiveIntensity: 0.5 }),
+          labelColor: '#00e5ff'
+        };
+
+      case 'egypt_pharaoh':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#e5c07b', roughness: 0.25, metalness: 0.35 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#1a1918', roughness: 0.15, metalness: 0.7 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#eab308', roughness: 0.2, metalness: 0.9, emissive: '#713f12', emissiveIntensity: 0.35 }),
+          labelColor: '#fde047'
+        };
+
+      case 'england_club':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#eddcc2', roughness: 0.35, metalness: 0.05 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#54231b', roughness: 0.4, metalness: 0.1 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#b45309', roughness: 0.3, metalness: 0.7, emissive: '#451a03', emissiveIntensity: 0.2 }),
+          labelColor: '#fef3c7'
+        };
+
+      case 'france_bistro':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#f8fafc', roughness: 0.15, metalness: 0.1 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#334155', roughness: 0.25, metalness: 0.2 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#b45309', roughness: 0.2, metalness: 0.85, emissive: '#3b1c03', emissiveIntensity: 0.25 }),
+          labelColor: '#d97706'
+        };
+
+      case 'brazil_rio':
+        return {
+          lightSquareMat: new THREE.MeshStandardMaterial({ color: '#fef08a', roughness: 0.3, metalness: 0.1 }),
+          darkSquareMat: new THREE.MeshStandardMaterial({ color: '#15803d', roughness: 0.35, metalness: 0.2 }),
+          borderMat: new THREE.MeshStandardMaterial({ color: '#06b6d4', roughness: 0.2, metalness: 0.8, emissive: '#083344', emissiveIntensity: 0.3 }),
+          labelColor: '#38bdf8'
+        };
+
       case 'brown':
       default:
         return {
